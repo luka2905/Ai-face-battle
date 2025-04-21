@@ -30,3 +30,22 @@
   <script src="script.js"></script>
 </body>
 </html>
+<div class="container">
+  <h1>🧠 AI Face Battle</h1>
+
+  <div class="upload-section">
+    <div>
+      <h3>Spieler 1</h3>
+      <input type="file" accept="image/*" id="playerOneInput" />
+      <img id="playerOnePreview" class="preview" style="display: none;" />
+    </div>
+    <div>
+      <h3>Spieler 2</h3>
+      <input type="file" accept="image/*" id="playerTwoInput" />
+      <img id="playerTwoPreview" class="preview" style="display: none;" />
+    </div>
+  </div>
+
+  <button id="battleBtn" disabled>Battle starten</button>
+  <div id="result"></div>
+</div>
