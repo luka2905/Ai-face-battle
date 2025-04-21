@@ -107,6 +107,28 @@ function areImagesEqual(file1, file2) {
     reader1.readAsDataURL(file1);
   });
 }
+// Beispiel für benutzerdefiniertes Ereignis beim Hochladen von Bildern
+document.getElementById("playerOneInput").addEventListener("change", function() {
+  gtag('event', 'upload_image', {
+    'event_category': 'Image 1',
+    'event_label': 'Image Uploaded'
+  });
+});
+
+document.getElementById("playerTwoInput").addEventListener("change", function() {
+  gtag('event', 'upload_image', {
+    'event_category': 'Image 2',
+    'event_label': 'Image Uploaded'
+  });
+});
+
+// Beispiel für ein Ereignis, wenn der Battle-Button geklickt wird
+document.getElementById("battleBtn").addEventListener("click", function() {
+  gtag('event', 'start', {
+    'event_category': 'Game',
+    'event_label': 'Generate Started'
+  });
+});
 
   setTimeout(function () {
     resultDiv.innerHTML = "Image 1 gewinnt!";
