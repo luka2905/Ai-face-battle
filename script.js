@@ -72,7 +72,7 @@ battleBtn.addEventListener('click', function () {
         resultElement.textContent = "Es ist ein Unentschieden! Die Bilder sind gleich.";
       } else {
         // Hier kannst du die Logik für den Gewinner einfügen
-        const winner = Math.random() < 0.5 ? "Spieler 1" : "Spieler 2";
+        const winner = Math.random() < 0.5 ? "Image1" : "Image 2";
         resultElement.textContent = `${winner} hat gewonnen!`;
       }
     })
@@ -109,6 +109,6 @@ function areImagesEqual(file1, file2) {
 }
 
   setTimeout(function () {
-    resultDiv.innerHTML = "Spieler 1 gewinnt!";
+    resultDiv.innerHTML = "Image 1 gewinnt!";
   }, 2000);
 });
