@@ -45,6 +45,69 @@ battleBtn.addEventListener('click', function () {
   resultDiv.innerHTML = "Das Battle hat begonnen!";
 
   // Beispielhafte Ausgabe - Du könntest auch eine künstliche Intelligenz verwenden, um das Ergebnis zu bestimmen
+  document.getElementById("battleBtn").addEventListener("click", function () {
+  const playerOneInput = document.getElementById("playerOneInput");
+  const playerTwoInput = document.getElementById("playerTwoInput");
+  const playerOnePreview = document.getElementById("playerOnePreview");
+  const playerTwoPreview = document.getElementById("playerTwoPreview");
+
+  const resultElement = document.getElementById("result");
+
+  // Wenn keine Bilder ausgewählt wurden
+  if (!playerOneInput.files[0] || !playerTwoInput.files[0]) {
+    resultElement.textContent = "Beide Spieler müssen Bilder hochladen!";
+    return;
+  }
+
+  // Bilder der Spieler anzeigen
+  playerOnePreview.src = URL.createObjectURL(playerOneInput.files[0]);
+  playerTwoPreview.src = URL.createObjectURL(playerTwoInput.files[0]);
+  playerOnePreview.style.display = "block";
+  playerTwoPreview.style.display = "block";
+
+  // Wenn die Bilder gleich sind (Verhindern der Veränderung des Ergebnisses)
+  areImagesEqual(playerOneInput.files[0], playerTwoInput.files[0])
+    .then((equal) => {
+      if (equal) {
+        resultElement.textContent = "Es ist ein Unentschieden! Die Bilder sind gleich.";
+      } else {
+        // Hier kannst du die Logik für den Gewinner einfügen
+        const winner = Math.random() < 0.5 ? "Spieler 1" : "Spieler 2";
+        resultElement.textContent = `${winner} hat gewonnen!`;
+      }
+    })
+    .catch((error) => {
+      console.error("Fehler beim Bildvergleich:", error);
+      resultElement.textContent = "Fehler beim Vergleichen der Bilder.";
+    });
+});
+
+// Funktion zum Vergleichen von Bildern
+function areImagesEqual(file1, file2) {
+  return new Promise((resolve, reject) => {
+    const reader1 = new FileReader();
+    const reader2 = new FileReader();
+
+    reader1.onload = function () {
+      reader2.onload = function () {
+        const image1 = new Image();
+        const image2 = new Image();
+
+        image1.onload = function () {
+          image2.onload = function () {
+            // Vergleich der Bilder als Base64-Strings
+            resolve(reader1.result === reader2.result);
+          };
+          image2.src = reader2.result;
+        };
+        image1.src = reader1.result;
+      };
+      reader2.readAsDataURL(file2);
+    };
+    reader1.readAsDataURL(file1);
+  });
+}
+
   setTimeout(function () {
     resultDiv.innerHTML = "Spieler 1 gewinnt!";
   }, 2000);
