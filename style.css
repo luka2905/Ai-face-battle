@@ -86,3 +86,22 @@ button:hover {
   color: #f39c12;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
+/* Stil für das LK Logo */
+#company-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #f39c12; /* Gelb für modern und auffällig */
+  letter-spacing: 5px; /* Abstand zwischen den Buchstaben */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modernes Schriftbild */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Schlagschatten für Tiefe */
+  cursor: pointer;
+}
+
+#company-logo:hover {
+  color: #e74c3c; /* Wenn der Benutzer mit der Maus darüber fährt, wird die Farbe rot */
+  transform: scale(1.1); /* Ein leichter Zoom-Effekt beim Hover */
+  transition: all 0.3s ease; /* Übergang für die Farbe und den Zoom-Effekt */
+}
