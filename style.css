@@ -1,104 +1,58 @@
-/* Grundlegendes Layout */
 body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #0f0f1a, #23232e);
-  color: white;
+  font-family: Arial, sans-serif;
+  background: #1a1a1a;
+  color: #fff;
   text-align: center;
+  padding: 20px;
 }
 
-/* Container für den Hauptbereich */
 .container {
-  background-color: rgba(0, 0, 0, 0.7); /* Transparente schwarze Hintergrundfarbe */
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  max-width: 500px;
-  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Überschrift */
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #00FFAB; /* Ein neonartiges Grün */
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Upload-Section für Bilder */
 .upload-section {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 20px;
 }
 
 .upload-box {
-  flex: 1;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.1); /* Leichte Transparenz für den Hintergrund */
-  border-radius: 10px;
-  margin: 0 10px;
+  text-align: center;
 }
 
-input[type="file"] {
+.upload-box input[type="file"] {
   margin-top: 10px;
-  padding: 10px;
-  border: none;
-  background-color: #333;
+}
+
+.preview {
+  max-width: 200px;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
   color: white;
   font-size: 16px;
-  border-radius: 5px;
-}
-
-input[type="file"]:hover {
-  background-color: #00FFAB; /* Hover-Effekt in grün */
-}
-
-/* Bild-Vorschau */
-img.preview {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-  display: none;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 255, 171, 0.6); /* Glühen rund um das Bild */
-}
-
-/* Button */
-button {
-  padding: 15px 30px;
-  background-color: #00FFAB;
-  color: black;
   border: none;
-  border-radius: 25px;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #009d7a; /* Dunkleres Grün bei Hover */
 }
 
 button:disabled {
-  background-color: #555;
-  cursor: not-allowed;
+  background-color: #ccc;
 }
 
-/* Ergebnis-Bereich */
+button:hover {
+  background-color: #45a049;
+}
+
 #result {
   margin-top: 20px;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: bold;
-  color: #00FFAB;
-  text-transform: uppercase;
+  color: #ff0000;
 }
