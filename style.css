@@ -1,173 +1,75 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #1a1a1a, #5c2f8a); /* Lila-Schwarz-Hintergrund */
-  color: #fff;
-  text-align: center;
-  padding: 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(45deg, #6a1b9a, #8e24aa, #d500f9); /* Lila-pink Farbverlauf */
+  color: white;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background: #222;
+  margin: 50px auto;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6); /* halbtransparentes schwarzes Hintergrund */
+  padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
   font-size: 36px;
+  margin-bottom: 20px;
   color: #f39c12;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .upload-section {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  gap: 30px;
+  flex-direction: column; /* Ändert das Layout, dass die Spieler untereinander sind */
+  gap: 20px;
 }
 
 .upload-box {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  padding: 20px;
   text-align: center;
 }
 
-.upload-box input[type="file"] {
-  margin-top: 10px;
-  background-color: #5c2f8a;
+input[type="file"] {
+  background: #333;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+button {
+  background: #f39c12;
   border: none;
   color: white;
-  padding: 12px 20px;
+  padding: 15px 30px;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.upload-box input[type="file"]:hover {
-  background-color: #8e44ad;
+button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background: #e74c3c;
 }
 
 .preview {
+  width: 100%;
   max-width: 200px;
+  height: auto;
   margin-top: 10px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-  border: 5px solid #fff;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-
-button {
-  padding: 14px 30px;
-  background-color: #e74c3c; /* Rote Akzentfarbe */
-  color: white;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
-
-button:disabled {
-  background-color: #cccccc;
-}
-
-button:hover {
-  background-color: #c0392b;
-}
-
-#result {
-  margin-top: 30px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #f39c12;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-}
-/* Stil für das LK Logo */
-#company-logo {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 36px;
-  font-weight: bold;
-  color: #f39c12; /* Gelb für modern und auffällig */
-  letter-spacing: 5px; /* Abstand zwischen den Buchstaben */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modernes Schriftbild */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Schlagschatten für Tiefe */
-  cursor: pointer;
-}
-
-#company-logo:hover {
-  color: #e74c3c; /* Wenn der Benutzer mit der Maus darüber fährt, wird die Farbe rot */
-  transform: scale(1.1); /* Ein leichter Zoom-Effekt beim Hover */
-  transition: all 0.3s ease; /* Übergang für die Farbe und den Zoom-Effekt */
-}
-/* Basis-Stile für Desktop und größere Bildschirme */
-body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(45deg, #9b59b6, #8e44ad, #2c3e50);
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  overflow: hidden;
-}
-
-.container {
-  max-width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.upload-section {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.upload-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-button {
-  background-color: #f39c12;
-  color: white;
-  border: none;
-  padding: 15px 25px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: background-color 0.3s ease;
-}
-
-button:disabled {
-  background-color: #ccc;
-}
-
-button:hover {
-  background-color: #e74c3c;
-}
-
-.preview {
-  margin-top: 10px;
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
 }
 
 #company-logo {
@@ -178,7 +80,6 @@ button:hover {
   font-weight: bold;
   color: #f39c12;
   letter-spacing: 5px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
 }
@@ -189,49 +90,23 @@ button:hover {
   transition: all 0.3s ease;
 }
 
-/* Responsives Design: Anpassungen für kleinere Bildschirme (Mobilgeräte) */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .upload-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .upload-box {
-    margin-bottom: 20px;
-  }
-
-  button {
-    padding: 12px 20px;
-    font-size: 16px;
-  }
-
-  .preview {
-    width: 80px;
-    height: 80px;
-  }
+#result {
+  margin-top: 30px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-/* Weitere Anpassungen für sehr kleine Bildschirme (z.B. Smartphones im Hochformat) */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
   h1 {
-    font-size: 1.5rem;
+    font-size: 28px;
   }
 
   button {
-    padding: 10px 15px;
-    font-size: 14px;
-  }
-
-  .preview {
-    width: 60px;
-    height: 60px;
-  }
-
-  #company-logo {
-    font-size: 28px;
+    width: 100%;
+    font-size: 18px;
   }
 }
