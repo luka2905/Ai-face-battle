@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Face Battle</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -11,31 +11,33 @@
     <h1>🧠 AI Face Battle</h1>
 
     <div class="upload-section">
+      <!-- Spieler 1 -->
       <div class="upload-box">
-        <h3>image 1</h3>
+        <h3>Image 1</h3>
         <input type="file" accept="image/*" id="playerOneInput" />
-        <img id="playerOnePreview" class="preview" style="display: none;" />
+        <img id="playerOnePreview" class="preview" />
       </div>
+
+      <!-- Spieler 2 -->
       <div class="upload-box">
-        <h3>image 2</h3>
+        <h3>Image 2</h3>
         <input type="file" accept="image/*" id="playerTwoInput" />
-        <img id="playerTwoPreview" class="preview" style="display: none;" />
+        <img id="playerTwoPreview" class="preview" />
       </div>
     </div>
 
-    <button id="battleBtn" disabled>Battle starten</button>
+    <!-- Button zum Starten des Spiels -->
+    <button id="battleBtn" disabled>start</button>
+
+    <!-- Ergebnisbereich -->
     <div id="result"></div>
   </div>
+
+  <!-- LK Logo als Link zu deinem Instagram-Profil -->
+  <a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
+    LK
+  </a>
 
   <script src="script.js"></script>
 </body>
 </html>
-<div id="company-logo">
-  LK
-</div>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- Das LK-Logo als Link zu deinem Instagram-Profil -->
-<a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
-  LK
-</a>
-
