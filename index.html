@@ -2,47 +2,27 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Face Battle</title>
+  
+  <!-- Google Analytics Tag für GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // GA4 Tracking
+    gtag('config', 'G-DJ73ZJSSHG');
+  </script>
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <h1>🧠 AI Face Battle</h1>
-
-    <div class="upload-section">
-      <!-- Spieler 1 -->
-      <div class="upload-box">
-        <h3>Image 1</h3>
-        <input type="file" accept="image/*" id="playerOneInput" />
-        <img id="playerOnePreview" class="preview" />
-      </div>
-
-      <!-- Spieler 2 -->
-      <div class="upload-box">
-        <h3>Image 2</h3>
-        <input type="file" accept="image/*" id="playerTwoInput" />
-        <img id="playerTwoPreview" class="preview" />
-      </div>
-    </div>
-
-    <!-- Button zum Starten des Spiels -->
-    <button id="battleBtn" disabled>Start</button>
-
-    <!-- Ergebnisbereich -->
-    <div id="result"></div>
+    <!-- Dein restlicher HTML-Code -->
   </div>
-
-  <!-- LK Logo als Link zu deinem Instagram-Profil -->
-  <a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
-    LK
-  </a>
-
-  <!-- Werbung Bereich -->
-  <div class="advertising-section">
-    <p>For advertising opportunities, please contact us at <a href="mailto:llaaccessorieess@gmail.com">llaaccessorieess@gmail.com</a></p>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>
