@@ -11,8 +11,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
-    // GA4 Tracking
     gtag('config', 'G-DJ73ZJSSHG');
   </script>
 
@@ -21,31 +19,14 @@
 <body>
   <div class="container">
     <h1>🧠 AI Face Battle</h1>
-    <!-- Dein restlicher HTML-Code -->
-  </div>
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Face Battle</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-
+    <!-- Spieler Uploads -->
     <div class="upload-section">
-      <!-- Spieler 1 -->
       <div class="upload-box">
         <h3>Picture 1</h3>
         <input type="file" accept="image/*" id="playerOneInput" />
         <img id="playerOnePreview" class="preview" />
       </div>
-
-      <!-- Spieler 2 -->
       <div class="upload-box">
         <h3>Picture 2</h3>
         <input type="file" accept="image/*" id="playerTwoInput" />
@@ -53,21 +34,23 @@
       </div>
     </div>
 
-    <!-- Button zum Starten des Spiels -->
+    <!-- Battle Button -->
     <button id="battleBtn" disabled>Battle starten</button>
 
-    <!-- Ergebnisbereich -->
+    <!-- Ergebnisanzeige -->
     <div id="result"></div>
-  </div>
 
-  <!-- LK Logo als Link zu deinem Instagram-Profil -->
-  <a href="https://www.instagram.com/lk_example/" target="_blank" id="company-logo">
-    LK
-  </a>
+    <!-- Instagram-Link mit LK -->
+    <a href="https://www.instagram.com/lk_example/" target="_blank" id="company-logo">
+      LK
+    </a>
 
-  <!-- Werbung Bereich -->
-  <div class="advertising-section">
-    <p>For advertising opportunities, please contact us at <a href="mailto:llaaccessorieess@gmail.com">llaaccessorieess@gmail.com</a></p>
+    <!-- Werbebereich -->
+    <div class="advertising-section">
+      <p>For advertising opportunities, please contact us at 
+        <a href="mailto:llaaccessorieess@gmail.com">llaaccessorieess@gmail.com</a>
+      </p>
+    </div>
   </div>
 
   <script src="script.js"></script>
