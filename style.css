@@ -1,20 +1,32 @@
 body {
-  font-family: Arial, sans-serif;
-  background: #1a1a1a;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #1a1a1a, #5c2f8a); /* Lila-Schwarz-Hintergrund */
   color: #fff;
   text-align: center;
-  padding: 20px;
+  padding: 40px;
+  margin: 0;
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
+  padding: 20px;
+  background: #222;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-size: 36px;
+  color: #f39c12;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .upload-section {
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
+  gap: 30px;
 }
 
 .upload-box {
@@ -23,6 +35,17 @@ body {
 
 .upload-box input[type="file"] {
   margin-top: 10px;
+  background-color: #5c2f8a;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.upload-box input[type="file"]:hover {
+  background-color: #8e44ad;
 }
 
 .preview {
@@ -31,28 +54,35 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 10px;
+  border: 5px solid #fff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
+  padding: 14px 30px;
+  background-color: #e74c3c; /* Rote Akzentfarbe */
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 button:disabled {
-  background-color: #ccc;
+  background-color: #cccccc;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #c0392b;
 }
 
 #result {
-  margin-top: 20px;
-  font-size: 24px;
+  margin-top: 30px;
+  font-size: 28px;
   font-weight: bold;
-  color: #ff0000;
+  color: #f39c12;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
