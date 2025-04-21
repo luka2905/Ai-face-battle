@@ -55,7 +55,7 @@ battleBtn.addEventListener('click', function () {
 
   // Wenn keine Bilder ausgewählt wurden
   if (!playerOneInput.files[0] || !playerTwoInput.files[0]) {
-    resultElement.textContent = "Beide Spieler müssen Bilder hochladen!";
+    resultElement.textContent = "Both players must upload pictures!";
     return;
   }
 
@@ -69,16 +69,16 @@ battleBtn.addEventListener('click', function () {
   areImagesEqual(playerOneInput.files[0], playerTwoInput.files[0])
     .then((equal) => {
       if (equal) {
-        resultElement.textContent = "Es ist ein Unentschieden! Die Bilder sind gleich.";
+        resultElement.textContent = " It's a tie! The pictures are the same.";
       } else {
         // Hier kannst du die Logik für den Gewinner einfügen
         const winner = Math.random() < 0.5 ? "Image1" : "Image 2";
-        resultElement.textContent = `${winner} hat gewonnen!`;
+        resultElement.textContent = `${winner} is better!`;
       }
     })
     .catch((error) => {
       console.error("Fehler beim Bildvergleich:", error);
-      resultElement.textContent = "Fehler beim Vergleichen der Bilder.";
+      resultElement.textContent = "Error comparing images.";
     });
 });
 
@@ -131,6 +131,6 @@ document.getElementById("battleBtn").addEventListener("click", function() {
 });
 
   setTimeout(function () {
-    resultDiv.innerHTML = "Image 1 gewinnt!";
+    resultDiv.innerHTML = "Image 1 is better!";
   }, 2000);
 });
