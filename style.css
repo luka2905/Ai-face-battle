@@ -110,3 +110,21 @@ button:hover {
     font-size: 18px;
   }
 }
+/* Werbebereich am unteren Rand */
+.advertising-section {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.advertising-section a {
+  color: #ff3e8d;
+  text-decoration: none;
+}
+
+.advertising-section a:hover {
+  text-decoration: underline;
+}
