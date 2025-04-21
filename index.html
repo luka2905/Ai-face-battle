@@ -2,19 +2,27 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Face Battle</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>AI Face Battle</h1>
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="E-Mail" required />
-      <input type="password" id="password" placeholder="Passwort" required />
-      <button type="submit">Einloggen</button>
-    </form>
-    <div id="message"></div>
+    <h1>🧠 AI Face Battle</h1>
+
+    <div class="upload-section">
+      <div>
+        <h3>Spieler 1</h3>
+        <input type="file" accept="image/*" id="playerOneInput" />
+      </div>
+      <div>
+        <h3>Spieler 2</h3>
+        <input type="file" accept="image/*" id="playerTwoInput" />
+      </div>
+    </div>
+
+    <button id="battleBtn" disabled>Battle starten</button>
+    <div id="result"></div>
   </div>
 
   <script src="script.js"></script>
