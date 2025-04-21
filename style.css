@@ -1,94 +1,104 @@
-* {
-  box-sizing: border-box;
+/* Grundlegendes Layout */
+body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-  background: linear-gradient(135deg, #121212, #1e1e1e);
-  color: white;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 2rem;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f0f1a, #23232e);
+  color: white;
+  text-align: center;
 }
 
+/* Container für den Hauptbereich */
+.container {
+  background-color: rgba(0, 0, 0, 0.7); /* Transparente schwarze Hintergrundfarbe */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Überschrift */
 h1 {
   font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: #00d8ff;
-  text-shadow: 0 0 10px #00d8ff66;
+  margin-bottom: 20px;
+  color: #00FFAB; /* Ein neonartiges Grün */
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
+/* Upload-Section für Bilder */
 .upload-section {
   display: flex;
-  gap: 3rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .upload-box {
-  background-color: #2c2c2c;
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.upload-box:hover {
-  transform: translateY(-5px);
+  flex: 1;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.1); /* Leichte Transparenz für den Hintergrund */
+  border-radius: 10px;
+  margin: 0 10px;
 }
 
 input[type="file"] {
-  margin-top: 1rem;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background-color: #333;
   color: white;
-  background-color: #444;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 8px;
-  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
 }
 
-.preview {
-  margin-top: 1rem;
-  max-width: 150px;
-  border-radius: 12px;
-  border: 2px solid #444;
+input[type="file"]:hover {
+  background-color: #00FFAB; /* Hover-Effekt in grün */
 }
 
+/* Bild-Vorschau */
+img.preview {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  display: none;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 171, 0.6); /* Glühen rund um das Bild */
+}
+
+/* Button */
 button {
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background-color: #00d8ff;
+  padding: 15px 30px;
+  background-color: #00FFAB;
+  color: black;
   border: none;
-  border-radius: 12px;
-  color: #121212;
+  border-radius: 25px;
   cursor: pointer;
-  box-shadow: 0 0 20px #00d8ff66;
-  transition: background 0.3s ease;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #00bde3;
+  background-color: #009d7a; /* Dunkleres Grün bei Hover */
 }
 
 button:disabled {
   background-color: #555;
-  color: #aaa;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
+/* Ergebnis-Bereich */
 #result {
-  margin-top: 2rem;
+  margin-top: 20px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #00ff88;
-  text-shadow: 0 0 5px #00ff8877;
+  color: #00FFAB;
+  text-transform: uppercase;
 }
