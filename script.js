@@ -2,17 +2,33 @@ const playerOneInput = document.getElementById("playerOneInput");
 const playerTwoInput = document.getElementById("playerTwoInput");
 const battleBtn = document.getElementById("battleBtn");
 const resultDiv = document.getElementById("result");
+const playerOnePreview = document.getElementById("playerOnePreview");
+const playerTwoPreview = document.getElementById("playerTwoPreview");
 
 let playerOneReady = false;
 let playerTwoReady = false;
 
 playerOneInput.addEventListener("change", () => {
-  playerOneReady = playerOneInput.files.length > 0;
+  const file = playerOneInput.files[0];
+  if (file) {
+    playerOneReady = true;
+    playerOnePreview.src = URL.createObjectURL(file);
+  } else {
+    playerOneReady = false;
+    playerOnePreview.src = "";
+  }
   checkReady();
 });
 
 playerTwoInput.addEventListener("change", () => {
-  playerTwoReady = playerTwoInput.files.length > 0;
+  const file = playerTwoInput.files[0];
+  if (file) {
+    playerTwoReady = true;
+    playerTwoPreview.src = URL.createObjectURL(file);
+  } else {
+    playerTwoReady = false;
+    playerTwoPreview.src = "";
+  }
   checkReady();
 });
 
