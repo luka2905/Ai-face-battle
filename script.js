@@ -1,10 +1,20 @@
-function login() {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+document.getElementById("loginForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-  if (email === "test@example.com" && password === "123456") {
-    document.getElementById("message").innerText = "Login erfolgreich!";
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const message = document.getElementById("message");
+
+  // Testdaten – später durch Backend ersetzbar
+  const dummyEmail = "test@example.com";
+  const dummyPassword = "123456";
+
+  if (email === dummyEmail && password === dummyPassword) {
+    message.textContent = "✅ Erfolgreich eingeloggt!";
+    message.style.color = "lightgreen";
+    // z.B. später Weiterleitung: window.location.href = "game.html";
   } else {
-    document.getElementById("message").innerText = "Login fehlgeschlagen.";
+    message.textContent = "❌ Falsche E-Mail oder Passwort!";
+    message.style.color = "red";
   }
-}
+});
