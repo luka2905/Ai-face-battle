@@ -8,15 +8,16 @@
 </head>
 <body>
   <div class="container">
-    <h1>Willkommen bei AI Face Battle</h1>
-    <div class="login-box">
-      <input type="email" id="email" placeholder="E-Mail" />
-      <input type="password" id="password" placeholder="Passwort" />
-      <button onclick="login()">Login</button>
-    </div>
-    <p id="message"></p>
+    <h1>AI Face Battle</h1>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="E-Mail" required />
+      <input type="password" id="password" placeholder="Passwort" required />
+      <button type="submit">Einloggen</button>
+    </form>
+    <div id="message"></div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
