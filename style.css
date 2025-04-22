@@ -1,135 +1,159 @@
-/* Global Styles */
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1a002d, #3a0066);
-  color: #ffffff;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  min-height: 100vh;
+  padding-bottom: 80px;
 }
 
-/* Container */
+/* Container für alles */
 .container {
-  max-width: 500px;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
   text-align: center;
-  margin-bottom: 30px;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
 }
 
-/* Überschrift */
+/* Titel */
 h1 {
-  font-size: 2em;
-  color: #ff99ff;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: fadeIn 1s ease-in-out;
 }
 
-/* Upload Section */
+/* Upload-Bereich */
 .upload-section {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  margin-bottom: 20px;
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
 .upload-box {
   background: rgba(255, 255, 255, 0.05);
-  padding: 15px;
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #ff00cc;
+  box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);
+  text-align: center;
 }
 
-/* Bildvorschau */
-.preview {
+/* Dateiinput */
+input[type="file"] {
   margin-top: 10px;
-  max-width: 100%;
-  border-radius: 15px;
-  border: 2px solid #ff66cc;
-  box-shadow: 0 0 12px #ff66cc80;
+  background-color: #fff;
+  color: #000;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* Vorschau-Bilder rund mit Glow */
+.preview {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ff00cc;
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 10px;
+}
+
+.preview:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 204, 0.8);
 }
 
 /* Battle Button */
 #battleBtn {
-  padding: 12px 24px;
-  font-size: 1em;
-  border: none;
-  border-radius: 25px;
   background: linear-gradient(to right, #ff00cc, #3333ff);
+  border: none;
   color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 30px;
   cursor: pointer;
   transition: 0.3s ease;
-  margin-top: 20px;
 }
 
-#battleBtn:disabled {
-  background: #444;
-  cursor: not-allowed;
-}
-
-#battleBtn:hover:not(:disabled) {
+#battleBtn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 12px #ff33cc;
+  box-shadow: 0 0 10px rgba(255, 0, 204, 0.6);
 }
 
-/* Ergebnis */
+/* Ergebnis-Anzeige */
 #result {
+  font-size: 24px;
   margin-top: 20px;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #ffccff;
+  color: #fff;
 }
 
-/* Logo in rechter Ecke */
-#company-logo {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  font-size: 1.3em;
-  font-weight: bold;
-  background: linear-gradient(to right, #ff33cc, #9900ff);
-  color: white;
-  padding: 8px 14px;
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 0 10px #ff33cc80;
-  z-index: 999;
-}
-
-/* Werbung unten */
+/* Werbung */
 .advertising-section {
   margin-top: 40px;
   text-align: center;
-  font-size: 0.9em;
-  color: #cccccc;
+  font-size: 14px;
+  color: #ccc;
 }
 
 .advertising-section a {
-  color: #ffccff;
-  text-decoration: underline;
+  color: #ff66cc;
+  text-decoration: none;
 }
 
-/* Responsiv */
+/* Firma-Logo (Instagram-Link) */
+#company-logo {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-decoration: none;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
+
+#company-logo:hover {
+  transform: scale(1.2);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile Optimierung */
 @media (max-width: 600px) {
-  .container {
-    padding: 15px;
-  }
-
   h1 {
-    font-size: 1.6em;
+    font-size: 2rem;
   }
 
-  .upload-section {
-    gap: 20px;
+  .preview {
+    width: 120px;
+    height: 120px;
   }
 
   #battleBtn {
-    font-size: 0.9em;
-    padding: 10px 20px;
+    width: 100%;
+  }
+
+  .upload-box {
+    padding: 15px;
   }
 }
