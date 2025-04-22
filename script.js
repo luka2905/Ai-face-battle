@@ -134,3 +134,26 @@ document.getElementById("battleBtn").addEventListener("click", function() {
     resultDiv.innerHTML = "Image 1 is better!";
   }, 2000);
 });
+// Nickname speichern und anzeigen
+function saveNickname() {
+  const nickname = document.getElementById('nicknameInput').value.trim();
+  if (nickname) {
+    localStorage.setItem('nickname', nickname);
+    document.getElementById('nicknameOverlay').style.display = 'none';
+    document.getElementById('welcomeText').textContent = `Welcome, ${nickname}!`;
+
+    // Nickname an Google Analytics senden
+    gtag('event', 'set_nickname', {
+      nickname: nickname
+    });
+  }
+}
+
+// Wenn Nutzer schon Nickname hat, überspringe Overlay
+window.addEventListener('DOMContentLoaded', () => {
+  const savedNickname = localStorage.getItem('nickname');
+  if (savedNickname) {
+    document.getElementById('nicknameOverlay').style.display = 'none';
+    document.getElementById('welcomeText').textContent = `Welcome back, ${savedNickname}!`;
+  }
+});
