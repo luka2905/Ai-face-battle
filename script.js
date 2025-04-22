@@ -112,4 +112,8 @@ battleBtn.addEventListener('click', () => {
     resultDiv.textContent = "Fehler beim Vergleich.";
   });
 });
+gtag('event', 'set_nickname', {
+  nickname: nickname // Muss exakt mit dem Namen deiner benutzerdefinierten Dimension übereinstimmen!
+});
+
 
