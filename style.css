@@ -208,3 +208,29 @@ input[type="file"] {
   margin-top: 1rem;
   font-size: 1.2rem;
 }
+
+.made-in-georgia {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 10px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 999;
+  gap: 8px;
+}
+
+.made-in-georgia img {
+  width: 20px;
+  height: 14px;
+  object-fit: contain;
+  border: 1px solid white;
+  border-radius: 2px;
+}
+
