@@ -22,8 +22,9 @@ function saveNickname() {
     gtag('event', 'set_nickname', {
       nickname: nickname
     });
-    // Optional: Send to Amplitude
-    amplitude.getInstance().logEvent('set_nickname', { nickname: nickname });
+
+    // Send to Amplitude
+    amplitude.logEvent('set_nickname', { nickname: nickname });
   }
 }
 
@@ -64,7 +65,7 @@ playerOneInput.addEventListener('change', () => {
     'event_category': 'Image 1',
     'event_label': 'Image Uploaded'
   });
-  amplitude.getInstance().logEvent('upload_image_1');
+  amplitude.logEvent('upload_image_1');
 });
 
 playerTwoInput.addEventListener('change', () => {
@@ -73,7 +74,7 @@ playerTwoInput.addEventListener('change', () => {
     'event_category': 'Image 2',
     'event_label': 'Image Uploaded'
   });
-  amplitude.getInstance().logEvent('upload_image_2');
+  amplitude.logEvent('upload_image_2');
 });
 
 // Compare two images with error handling
@@ -123,9 +124,9 @@ battleBtn.addEventListener('click', () => {
     'event_category': 'Game',
     'event_label': 'Generate Started'
   });
-  amplitude.getInstance().logEvent('game_started');
+  amplitude.logEvent('game_started');
 
-    // Compare images
+  // Compare images
   areImagesEqual(file1, file2).then(equal => {
     let resultText;
     if (equal) {
@@ -146,7 +147,8 @@ battleBtn.addEventListener('click', () => {
       'event_category': 'Game',
       'event_label': resultText
     });
-    amplitude.getInstance().logEvent('battle_result', { result: resultText });
+    amplitude.logEvent('battle_result', { result: resultText });
+
   }).catch(err => {
     console.error("Image comparison error:", err);
     resultDiv.textContent = `Error comparing images: ${err}`;
