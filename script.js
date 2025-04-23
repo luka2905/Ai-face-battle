@@ -125,7 +125,7 @@ battleBtn.addEventListener('click', () => {
   });
   amplitude.getInstance().logEvent('game_started');
 
-  // Compare images
+    // Compare images
   areImagesEqual(file1, file2).then(equal => {
     let resultText;
     if (equal) {
@@ -149,6 +149,6 @@ battleBtn.addEventListener('click', () => {
     amplitude.getInstance().logEvent('battle_result', { result: resultText });
   }).catch(err => {
     console.error("Image comparison error:", err);
-    resultDiv.textContent = "Error comparing images.";
+    resultDiv.textContent = `Error comparing images: ${err}`;
   });
 });
