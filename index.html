@@ -75,16 +75,15 @@
   <footer style="text-align: center; color: #888; margin-top: 2rem; font-size: 0.8rem;">
     We collect anonymous nicknames for analytics purposes only. No personal data is stored.
   </footer>
-
-  <!-- Mouseflow Tracking Code -->
-  <script type="text/javascript">
-    window._mfq = window._mfq || [];
-    (function() {
-      var mf = document.createElement("script");
-      mf.type = "text/javascript"; mf.defer = true;
-      mf.src = "//cdn.mouseflow.com/projects/dbaa9fcf-4d02-42b0-afad-e5d738bb5b31.js";
-      document.getElementsByTagName("head")[0].appendChild(mf);
-    })();
+   <!-- Amplitude Tracking Code -->
+  <script src="https://cdn.eu.amplitude.com/script/112dc8b790c791b0abce53244ac11739.js"></script>
+  <script>
+    window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+    window.amplitude.init('112dc8b790c791b0abce53244ac11739', {
+      "fetchRemoteConfig": true,
+      "serverZone": "EU",
+      "autocapture": true
+    });
   </script>
 
 </body>
