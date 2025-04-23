@@ -18,15 +18,12 @@ function saveNickname() {
     document.getElementById('nicknameOverlay').style.display = 'none';
     document.getElementById('welcomeText').textContent = `Welcome, ${nickname}!`;
 
-    // Send nickname to Amplitude as a user property
-    window.amplitude.getInstance().setUserProperties({
-      'username': nickname
-    });
-
-    // Log nickname event in Google Analytics
+    // Track nickname with Google Analytics
     gtag('event', 'set_nickname', {
       nickname: nickname
     });
+    // Optional: Send to Amplitude
+    amplitude.getInstance().logEvent('set_nickname', { nickname: nickname });
   }
 }
 
@@ -60,42 +57,26 @@ function checkBattleReady() {
   battleBtn.disabled = !(playerOneInput.files.length > 0 && playerTwoInput.files.length > 0);
 }
 
-// Handle image uploads with GA event
+// Handle image uploads with GA and Amplitude events
 playerOneInput.addEventListener('change', () => {
   displayImagePreview(playerOneInput, playerOnePreview);
-  const nickname = localStorage.getItem('nickname');
-  
-  // Send the upload event to Amplitude with the user's nickname
-  window.amplitude.getInstance().logEvent('upload_image', {
-    'event_category': 'Image 1',
-    'event_label': 'Image Uploaded',
-    'username': nickname // Send the nickname as event property
-  });
-
   gtag('event', 'upload_image', {
     'event_category': 'Image 1',
     'event_label': 'Image Uploaded'
   });
+  amplitude.getInstance().logEvent('upload_image_1');
 });
 
 playerTwoInput.addEventListener('change', () => {
   displayImagePreview(playerTwoInput, playerTwoPreview);
-  const nickname = localStorage.getItem('nickname');
-  
-  // Send the upload event to Amplitude with the user's nickname
-  window.amplitude.getInstance().logEvent('upload_image', {
-    'event_category': 'Image 2',
-    'event_label': 'Image Uploaded',
-    'username': nickname // Send the nickname as event property
-  });
-
   gtag('event', 'upload_image', {
     'event_category': 'Image 2',
     'event_label': 'Image Uploaded'
   });
+  amplitude.getInstance().logEvent('upload_image_2');
 });
 
-// Compare two images
+// Compare two images with error handling
 function areImagesEqual(file1, file2) {
   return new Promise((resolve, reject) => {
     const reader1 = new FileReader();
@@ -105,13 +86,16 @@ function areImagesEqual(file1, file2) {
       reader2.onload = function () {
         resolve(reader1.result === reader2.result);
       };
+      reader2.onerror = () => reject('Error reading file 2');
       reader2.readAsDataURL(file2);
     };
+
+    reader1.onerror = () => reject('Error reading file 1');
     reader1.readAsDataURL(file1);
   });
 }
 
-// Simple hash from file names to prevent switching results
+// Create simple hash based on file names
 function getFileHash(file1, file2) {
   return file1.name + '_' + file2.name;
 }
@@ -120,7 +104,6 @@ function getFileHash(file1, file2) {
 battleBtn.addEventListener('click', () => {
   const file1 = playerOneInput.files[0];
   const file2 = playerTwoInput.files[0];
-  const nickname = localStorage.getItem('nickname');
 
   if (!file1 || !file2) {
     resultDiv.textContent = "Both players must upload images!";
@@ -129,17 +112,20 @@ battleBtn.addEventListener('click', () => {
 
   const currentHash = getFileHash(file1, file2);
 
-  // If same pair was already compared, show same result
+  // Use cached result if already compared
   if (currentHash === previousHash) {
     resultDiv.textContent = previousResult;
     return;
   }
 
+  // Track game start
   gtag('event', 'start', {
     'event_category': 'Game',
     'event_label': 'Generate Started'
   });
+  amplitude.getInstance().logEvent('game_started');
 
+  // Compare images
   areImagesEqual(file1, file2).then(equal => {
     let resultText;
     if (equal) {
@@ -151,15 +137,16 @@ battleBtn.addEventListener('click', () => {
 
     resultDiv.textContent = resultText;
 
-    // Send Battle result to Amplitude with username
-    window.amplitude.getInstance().logEvent('image_battle_result', {
-      'result': resultText,
-      'username': nickname // Send the nickname as event property
-    });
-
-    // Save hash and result to prevent flipping
+    // Save result for this pair
     previousHash = currentHash;
     previousResult = resultText;
+
+    // Track result
+    gtag('event', 'battle_result', {
+      'event_category': 'Game',
+      'event_label': resultText
+    });
+    amplitude.getInstance().logEvent('battle_result', { result: resultText });
   }).catch(err => {
     console.error("Image comparison error:", err);
     resultDiv.textContent = "Error comparing images.";
