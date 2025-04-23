@@ -1,35 +1,85 @@
-<!DOCTYPE html>
-<html lang="ka">
-<head>
-  <meta charset="UTF-8">
-  <title>გაცელდი კესი</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ff00cc, #ff66ff, #ffccff);
-      background-size: 400% 400%;
-      animation: gradientFlow 10s ease infinite;
-      color: pink;
-      text-align: center;
-    }
 
-    @keyframes gradientFlow {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DJ73ZJSSHG');
+  </script>
 
-    h1 {
-      font-size: 3rem;
-      color: white;
-      text-shadow: 0 0 10px pink, 0 0 20px hotpink;
-      margin-bottom: 30px;
-      animation: pulse
+  <link rel="stylesheet" href="style.css">
+  <!-- JavaScript defer geladen -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 AI Face Battle</h1>
 
+    <!-- Spieler Uploads -->
+    <div class="upload-section">
+      <div class="upload-box">
+        <h3>Picture 1</h3>
+        <input type="file" accept="image/*" id="playerOneInput" />
+        <img id="playerOnePreview" class="preview" />
+      </div>
+      <div class="upload-box">
+        <h3>Picture 2</h3>
+        <input type="file" accept="image/*" id="playerTwoInput" />
+        <img id="playerTwoPreview" class="preview" />
+      </div>
+    </div>
+
+    <!-- Battle Button -->
+    <button id="battleBtn" disabled>Battle starten</button>
+
+    <!-- Ergebnisanzeige -->
+    <div id="result"></div>
+
+    <!-- Instagram-Link mit LK -->
+    <a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
+      LK
+    </a>
+
+    <!-- Werbebereich -->
+    <div class="advertising-section">
+      <p>For advertising opportunities, please contact us at 
+        <a href="mailto:llaaccessorieess@gmail.com">llaaccessorieess@gmail.com</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Nickname Overlay -->
+  <div id="nicknameOverlay" class="overlay">
+    <div class="nickname-box">
+      <h2>Choose your nickname</h2>
+      <input type="text" id="nicknameInput" placeholder="Enter nickname..." />
+      <button onclick="saveNickname()">Start</button>
+    </div>
+  </div>
+
+  <!-- Begrüßungstext nach Eingabe -->
+  <div id="welcomeText" class="welcome-text"></div>
+
+  <!-- Made in Georgia Box -->
+  <div class="made-in-georgia">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Georgia.svg" alt="Georgia Flag">
+    <span>Made in Georgia</span>
+  </div>
+
+  <!-- Footer Hinweis -->
+  <footer style="text-align: center; color: #888; margin-top: 2rem; font-size: 0.8rem;">
+    We collect anonymous nicknames for analytics purposes only. No personal data is stored.
+  </footer>
+
+  <!-- Amplitude Tracking Code -->
+  <script src="https://cdn.eu.amplitude.com/script/112dc8b790c791b0abce53244ac11739.js"></script>
+  <script>
+    window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+    window.amplitude.init('112dc8b790c791b0abce53244ac11739', {
+      "fetchRemoteConfig": true,
+      "serverZone": "EU",
+      "autocapture": true
+    });
+  </script>
+</body>
+</html>
