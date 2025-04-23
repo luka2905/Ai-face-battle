@@ -18,6 +18,12 @@ function saveNickname() {
     document.getElementById('nicknameOverlay').style.display = 'none';
     document.getElementById('welcomeText').textContent = `Welcome, ${nickname}!`;
 
+    // Send nickname to Amplitude as a user property
+    window.amplitude.getInstance().setUserProperties({
+      'username': nickname
+    });
+
+    // Log nickname event in Google Analytics
     gtag('event', 'set_nickname', {
       nickname: nickname
     });
@@ -57,6 +63,15 @@ function checkBattleReady() {
 // Handle image uploads with GA event
 playerOneInput.addEventListener('change', () => {
   displayImagePreview(playerOneInput, playerOnePreview);
+  const nickname = localStorage.getItem('nickname');
+  
+  // Send the upload event to Amplitude with the user's nickname
+  window.amplitude.getInstance().logEvent('upload_image', {
+    'event_category': 'Image 1',
+    'event_label': 'Image Uploaded',
+    'username': nickname // Send the nickname as event property
+  });
+
   gtag('event', 'upload_image', {
     'event_category': 'Image 1',
     'event_label': 'Image Uploaded'
@@ -65,6 +80,15 @@ playerOneInput.addEventListener('change', () => {
 
 playerTwoInput.addEventListener('change', () => {
   displayImagePreview(playerTwoInput, playerTwoPreview);
+  const nickname = localStorage.getItem('nickname');
+  
+  // Send the upload event to Amplitude with the user's nickname
+  window.amplitude.getInstance().logEvent('upload_image', {
+    'event_category': 'Image 2',
+    'event_label': 'Image Uploaded',
+    'username': nickname // Send the nickname as event property
+  });
+
   gtag('event', 'upload_image', {
     'event_category': 'Image 2',
     'event_label': 'Image Uploaded'
@@ -96,6 +120,7 @@ function getFileHash(file1, file2) {
 battleBtn.addEventListener('click', () => {
   const file1 = playerOneInput.files[0];
   const file2 = playerTwoInput.files[0];
+  const nickname = localStorage.getItem('nickname');
 
   if (!file1 || !file2) {
     resultDiv.textContent = "Both players must upload images!";
@@ -125,6 +150,12 @@ battleBtn.addEventListener('click', () => {
     }
 
     resultDiv.textContent = resultText;
+
+    // Send Battle result to Amplitude with username
+    window.amplitude.getInstance().logEvent('image_battle_result', {
+      'result': resultText,
+      'username': nickname // Send the nickname as event property
+    });
 
     // Save hash and result to prevent flipping
     previousHash = currentHash;
