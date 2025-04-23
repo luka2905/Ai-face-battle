@@ -1,4 +1,4 @@
-// Eingabefelder, Previews, Button & Ergebnisfeld
+// Inputs, previews, button & result field
 const playerOneInput = document.getElementById('playerOneInput');
 const playerTwoInput = document.getElementById('playerTwoInput');
 const playerOnePreview = document.getElementById('playerOnePreview');
@@ -6,7 +6,11 @@ const playerTwoPreview = document.getElementById('playerTwoPreview');
 const battleBtn = document.getElementById('battleBtn');
 const resultDiv = document.getElementById('result');
 
-// Nickname-Funktion
+// Track previous image comparison hash
+let previousHash = null;
+let previousResult = null;
+
+// Save nickname
 function saveNickname() {
   const nickname = document.getElementById('nicknameInput').value.trim();
   if (nickname) {
@@ -14,14 +18,13 @@ function saveNickname() {
     document.getElementById('nicknameOverlay').style.display = 'none';
     document.getElementById('welcomeText').textContent = `Welcome, ${nickname}!`;
 
-    // Google Analytics Event
     gtag('event', 'set_nickname', {
       nickname: nickname
     });
   }
 }
 
-// Nickname anzeigen wenn schon gespeichert
+// Show nickname if already saved
 window.addEventListener('DOMContentLoaded', () => {
   const savedNickname = localStorage.getItem('nickname');
   if (savedNickname) {
@@ -30,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Bildvorschau anzeigen
+// Display image preview
 function displayImagePreview(input, preview) {
   const file = input.files[0];
   const reader = new FileReader();
@@ -46,12 +49,12 @@ function displayImagePreview(input, preview) {
   }
 }
 
-// Button aktivieren wenn beide Bilder da
+// Enable battle button only if both images are uploaded
 function checkBattleReady() {
   battleBtn.disabled = !(playerOneInput.files.length > 0 && playerTwoInput.files.length > 0);
 }
 
-// Event Listener für Dateiänderung
+// Handle image uploads with GA event
 playerOneInput.addEventListener('change', () => {
   displayImagePreview(playerOneInput, playerOnePreview);
   gtag('event', 'upload_image', {
@@ -68,7 +71,7 @@ playerTwoInput.addEventListener('change', () => {
   });
 });
 
-// Funktion zum Vergleichen der Bilder
+// Compare two images
 function areImagesEqual(file1, file2) {
   return new Promise((resolve, reject) => {
     const reader1 = new FileReader();
@@ -84,36 +87,50 @@ function areImagesEqual(file1, file2) {
   });
 }
 
-// Battle-Button Logik
+// Simple hash from file names to prevent switching results
+function getFileHash(file1, file2) {
+  return file1.name + '_' + file2.name;
+}
+
+// Battle logic
 battleBtn.addEventListener('click', () => {
   const file1 = playerOneInput.files[0];
   const file2 = playerTwoInput.files[0];
 
   if (!file1 || !file2) {
-    resultDiv.textContent = "Beide Spieler müssen ein Bild hochladen!";
+    resultDiv.textContent = "Both players must upload images!";
     return;
   }
 
-  // Google Analytics Event
+  const currentHash = getFileHash(file1, file2);
+
+  // If same pair was already compared, show same result
+  if (currentHash === previousHash) {
+    resultDiv.textContent = previousResult;
+    return;
+  }
+
   gtag('event', 'start', {
     'event_category': 'Game',
     'event_label': 'Generate Started'
   });
 
   areImagesEqual(file1, file2).then(equal => {
+    let resultText;
     if (equal) {
-      resultDiv.textContent = "Unentschieden! Beide Bilder sind gleich.";
+      resultText = "It's a tie! Both images are the same.";
     } else {
-      const winner = Math.random() < 0.5 ? "Bild 1" : "Bild 2";
-      resultDiv.textContent = `${winner} sieht besser aus! 🎉`;
+      const winner = Math.random() < 0.5 ? "Image 1" : "Image 2";
+      resultText = `${winner} looks better! 🎉`;
     }
+
+    resultDiv.textContent = resultText;
+
+    // Save hash and result to prevent flipping
+    previousHash = currentHash;
+    previousResult = resultText;
   }).catch(err => {
-    console.error("Fehler beim Bildvergleich:", err);
-    resultDiv.textContent = "Fehler beim Vergleich.";
+    console.error("Image comparison error:", err);
+    resultDiv.textContent = "Error comparing images.";
   });
 });
-gtag('event', 'set_nickname', {
-  nickname: nickname // Muss exakt mit dem Namen deiner benutzerdefinierten Dimension übereinstimmen!
-});
-
-
