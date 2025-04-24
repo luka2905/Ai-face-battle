@@ -1,4 +1,4 @@
-// Inputs, previews, button & result field
+// Get the input elements, preview images, battle button, and result field
 const playerOneInput = document.getElementById('playerOneInput');
 const playerTwoInput = document.getElementById('playerTwoInput');
 const playerOnePreview = document.getElementById('playerOnePreview');
@@ -10,7 +10,7 @@ const resultDiv = document.getElementById('result');
 let previousHash = null;
 let previousResult = null;
 
-// Save nickname
+// Save nickname function
 function saveNickname() {
   const nickname = document.getElementById('nicknameInput').value.trim();
   if (nickname) {
