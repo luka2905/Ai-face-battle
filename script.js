@@ -124,7 +124,7 @@ battleBtn.addEventListener('click', () => {
     'event_category': 'Game',
     'event_label': 'Generate Started'
   });
-  amplitude.logEvent('game_started');
+  amplitude.logEvent('start');
 
   // Compare images
   areImagesEqual(file1, file2).then(equal => {
@@ -154,3 +154,17 @@ battleBtn.addEventListener('click', () => {
     resultDiv.textContent = `Error comparing images: ${err}`;
   });
 });
+
+// Privacy Policy button logic
+const openPrivacyBtn = document.getElementById("openPrivacyBtn");
+const privacyOverlay = document.getElementById("privacyOverlay");
+const closePrivacyBtn = document.getElementById("closePrivacyBtn");
+
+openPrivacyBtn.addEventListener("click", () => {
+  privacyOverlay.style.display = "flex";
+});
+
+closePrivacyBtn.addEventListener("click", () => {
+  privacyOverlay.style.display = "none";
+});
+
