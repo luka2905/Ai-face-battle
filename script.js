@@ -124,7 +124,7 @@ battleBtn.addEventListener('click', () => {
     'event_category': 'Game',
     'event_label': 'Generate Started'
   });
-  amplitude.logEvent('Battle started');
+  amplitude.logEvent('Battle starten');
 
   // Compare images
   areImagesEqual(file1, file2).then(equal => {
