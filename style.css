@@ -295,7 +295,7 @@ input[type="file"] {
   width: 100%;
   background: rgba(255, 0, 204, 0.15);
   backdrop-filter: blur(6px);
-  color: #fff;
+  color: #b52899;
   text-align: center;
   padding: 10px;
   font-size: 0.9rem;
