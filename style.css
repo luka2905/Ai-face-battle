@@ -1,4 +1,4 @@
-/* Google Font */
+ /* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
 body {
@@ -242,13 +242,13 @@ input[type="file"] {
   z-index: 10000;
 }
 
-
-.made-in-georgia {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  ...
+.made-in-georgia img {
+  width: 24px;
+  height: auto;
+  border: 1px solid #fff;
+  border-radius: 4px;
 }
+
 /* Privacy button and overlay */
 .privacy-btn {
   position: fixed;
@@ -329,5 +329,3 @@ input[type="file"] {
     padding: 8px;
   }
 }
-
-
