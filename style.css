@@ -242,13 +242,13 @@ input[type="file"] {
   z-index: 10000;
 }
 
-.made-in-georgia img {
-  width: 24px;
-  height: auto;
-  border: 1px solid #fff;
-  border-radius: 4px;
-}
 
+.made-in-georgia {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  ...
+}
 /* Privacy button and overlay */
 .privacy-btn {
   position: fixed;
