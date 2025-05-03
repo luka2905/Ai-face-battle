@@ -232,7 +232,6 @@ input[type="file"] {
   border-radius: 4px;
 }
 
-/* Privacy Button und Overlay */
 .privacy-btn {
   position: fixed;
   bottom: 69px;
@@ -240,76 +239,72 @@ input[type="file"] {
   background: linear-gradient(to right, #ff00cc, #3333ff);
   color: #fff;
   border: none;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border-radius: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.9rem;
   cursor: pointer;
-  z-index: 1001; /* Höher als der Werbebanner */
+  z-index: 1001;
+  transition: all 0.3s ease;
+}
+
+.privacy-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 0, 204, 0.6);
 }
 
 .privacy-overlay {
-  display: none;
+  display: none; /* wichtig: Startzustand */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.9);
   justify-content: center;
   align-items: center;
-  z-index: 1001;
+  z-index: 1002;
   padding: 2rem;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .privacy-content {
-  background: #1e1e1e;
+  background: #1f1f2f;
   color: #fff;
   max-width: 700px;
   width: 100%;
   padding: 2rem;
   border-radius: 12px;
   position: relative;
-  font-family: Arial, sans-serif;
   overflow-y: auto;
   max-height: 90vh;
+  box-shadow: 0 0 25px rgba(255, 0, 204, 0.3);
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 14px;
+  top: 12px;
+  right: 16px;
   background: none;
-  color: white;
+  color: #fff;
   font-size: 1.5rem;
   border: none;
   cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-/* Werbebanner */
-.ad-banner {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(255, 0, 204, 0.15);
-  backdrop-filter: blur(6px);
-  color: #b52899;
-  text-align: center;
-  padding: 10px;
-  font-size: 0.9rem;
-  border-top: 1px solid #ff00cc;
-  z-index: 1000; /* Jetzt niedriger als der Made in Georgia und Privacy Button */
-  font-family: 'Arial', sans-serif;
-}
-
-.ad-banner a {
-  color: #b52899;
-  text-decoration: underline;
-  margin-left: 5px;
+.close-btn:hover {
+  color: #ff00cc;
 }
 
 @media (max-width: 480px) {
-  .ad-banner {
-    font-size: 0.75rem;
-    padding: 8px;
+  .privacy-content {
+    padding: 1rem;
+  }
+
+  .close-btn {
+    top: 8px;
+    right: 10px;
+    font-size: 1.3rem;
   }
 }
