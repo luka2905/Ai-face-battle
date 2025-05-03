@@ -329,3 +329,6 @@ input[type="file"] {
     padding: 8px;
   }
 }
+.ad-banner {
+  z-index: 500; /* vorher: 1000 */
+}
