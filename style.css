@@ -283,28 +283,41 @@ input[type="file"] {
 
 .close-btn {
   position: absolute;
-  top: 12px;
-  right: 16px;
+  top: 10px;
+  right: 14px;
   background: none;
-  color: #fff;
+  color: white;
   font-size: 1.5rem;
   border: none;
   cursor: pointer;
-  transition: color 0.3s ease;
 }
 
-.close-btn:hover {
-  color: #ff00cc;
+/* Werbebanner */
+.ad-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 0, 204, 0.15);
+  backdrop-filter: blur(6px);
+  color: #b52899;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-top: 1px solid #ff00cc;
+  z-index: 1000; /* Jetzt niedriger als der Made in Georgia und Privacy Button */
+  font-family: 'Arial', sans-serif;
+}
+
+.ad-banner a {
+  color: #b52899;
+  text-decoration: underline;
+  margin-left: 5px;
 }
 
 @media (max-width: 480px) {
-  .privacy-content {
-    padding: 1rem;
-  }
-
-  .close-btn {
-    top: 8px;
-    right: 10px;
-    font-size: 1.3rem;
+  .ad-banner {
+    font-size: 0.75rem;
+    padding: 8px;
   }
 }
