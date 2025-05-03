@@ -5,6 +5,8 @@ const playerOnePreview = document.getElementById('playerOnePreview');
 const playerTwoPreview = document.getElementById('playerTwoPreview');
 const battleBtn = document.getElementById('battleBtn');
 const resultDiv = document.getElementById('result');
+const nicknameOverlay = document.getElementById('nicknameOverlay');
+const welcomeText = document.getElementById('welcomeText');
 
 // Track previous image comparison hash
 let previousHash = null;
@@ -15,8 +17,8 @@ function saveNickname() {
   const nickname = document.getElementById('nicknameInput').value.trim();
   if (nickname) {
     localStorage.setItem('nickname', nickname);
-    document.getElementById('nicknameOverlay').style.display = 'none';
-    document.getElementById('welcomeText').textContent = `Welcome, ${nickname}!`;
+    nicknameOverlay.style.display = 'none';
+    welcomeText.textContent = `Welcome, ${nickname}!`;
 
     // Track nickname with Google Analytics
     gtag('event', 'set_nickname', {
@@ -32,9 +34,13 @@ function saveNickname() {
 window.addEventListener('DOMContentLoaded', () => {
   const savedNickname = localStorage.getItem('nickname');
   if (savedNickname) {
-    document.getElementById('nicknameOverlay').style.display = 'none';
-    document.getElementById('welcomeText').textContent = `Welcome back, ${savedNickname}!`;
+    nicknameOverlay.style.display = 'none';
+    welcomeText.textContent = `Welcome back, ${savedNickname}!`;
   }
+
+  // Add event listener for the Start button in the nickname overlay
+  const startButton = document.querySelector("button");
+  startButton.addEventListener("click", saveNickname);
 });
 
 // Display image preview
@@ -167,4 +173,3 @@ openPrivacyBtn.addEventListener("click", () => {
 closePrivacyBtn.addEventListener("click", () => {
   privacyOverlay.style.display = "none";
 });
-
