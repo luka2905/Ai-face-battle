@@ -212,8 +212,8 @@ input[type="file"] {
 
 .made-in-georgia {
   position: fixed;
-  bottom: 69px;
-  left: 20px;
+  bottom: 70px;
+  left: 0px;
   display: flex;
   align-items: center;
   gap: 10px;
