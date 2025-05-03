@@ -212,7 +212,7 @@ input[type="file"] {
 
 .made-in-georgia {
   position: fixed;
-  bottom: 20px;
+  bottom: 69px;
   left: 20px;
   display: flex;
   align-items: center;
@@ -220,7 +220,7 @@ input[type="file"] {
   background: rgba(255, 255, 255, 0.05);
   padding: 10px 15px;
   border-radius: 10px;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: #fff;
   z-index: 1001; /* Höher als der Werbebanner */
 }
@@ -235,7 +235,7 @@ input[type="file"] {
 /* Privacy Button und Overlay */
 .privacy-btn {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   right: 20px;
   background: linear-gradient(to right, #ff00cc, #3333ff);
   color: #fff;
