@@ -1,4 +1,4 @@
- /* Google Font */
+/* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
 body {
@@ -232,6 +232,7 @@ input[type="file"] {
   border-radius: 4px;
 }
 
+/* Privacy Button und Overlay */
 .privacy-btn {
   position: fixed;
   bottom: 69px;
@@ -239,46 +240,37 @@ input[type="file"] {
   background: linear-gradient(to right, #ff00cc, #3333ff);
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 20px;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 0.9rem;
   cursor: pointer;
-  z-index: 1001;
-  transition: all 0.3s ease;
-}
-
-.privacy-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(255, 0, 204, 0.6);
+  z-index: 1001; /* Höher als der Werbebanner */
 }
 
 .privacy-overlay {
-  display: none; /* wichtig: Startzustand */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.85);
   justify-content: center;
   align-items: center;
-  z-index: 1002;
+  z-index: 1001;
   padding: 2rem;
-  font-family: 'Orbitron', sans-serif;
 }
 
 .privacy-content {
-  background: #1f1f2f;
+  background: #1e1e1e;
   color: #fff;
   max-width: 700px;
   width: 100%;
   padding: 2rem;
   border-radius: 12px;
   position: relative;
+  font-family: Arial, sans-serif;
   overflow-y: auto;
   max-height: 90vh;
-  box-shadow: 0 0 25px rgba(255, 0, 204, 0.3);
 }
 
 .close-btn {
