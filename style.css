@@ -52,7 +52,7 @@ h1 {
 /* Dateieingabe */
 input[type="file"] {
   margin-top: 10px;
-  background-color: #fff;
+  background-color: #ff00c8;
   color: #000;
   border-radius: 5px;
   padding: 5px;
