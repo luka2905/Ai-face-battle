@@ -41,94 +41,18 @@
     .button:hover {
       transform: scale(1.05);
     }
-
-    /* Additional styling for the image upload and hug generation */
-    input[type="file"] {
-      margin: 1rem;
-      padding: 0.5rem;
-      background: #444;
-      color: white;
-      border: 2px solid #6a11cb;
-      border-radius: 5px;
-    }
-
-    #hugResult {
-      margin-top: 2rem;
-    }
-
-    #hugResult img {
-      width: 80%;
-      max-width: 400px;
-      border-radius: 15px;
-      margin-top: 1rem;
-    }
   </style>
 </head>
 <body>
   <h1>Willkommen auf AI Tools</h1>
   <a class="button" href="facebattle.html">🧠 AI Face Battle</a>
   <a class="button" href="aihug.html">🤗 AI Umarmung (aus Fotos)</a>
-
-  <!-- AI Hug Image Upload Section -->
-  <div id="aihugSection" style="margin-top: 2rem;">
-    <input type="file" id="imageOneInput" accept="image/*">
-    <input type="file" id="imageTwoInput" accept="image/*">
-    <button id="generateHugBtn">Generate Hug</button>
-
-    <!-- Result display area -->
-    <div id="hugResult" style="display: none;">
-      <h2>Your AI Hug:</h2>
-      <img id="hugImage" src="" alt="Generated Hug Image">
-    </div>
-  </div>
-
-  <script>
-    document.getElementById('generateHugBtn').addEventListener('click', async () => {
-      const file1 = document.getElementById('imageOneInput').files[0];
-      const file2 = document.getElementById('imageTwoInput').files[0];
-
-      if (!file1 || !file2) {
-        alert("Bitte lade zwei Bilder hoch.");
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('image_one', file1);
-      formData.append('image_two', file2);
-
-      // Replace with your Replicate API key and model version ID
-      const apiKey = "YOUR_REPLICATE_API_KEY";
-      const modelVersionId = "YOUR_MODEL_VERSION_ID";
-
-      try {
-        const response = await fetch('https://api.replicate.com/v1/predictions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Token ${apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            version: modelVersionId,
-            input: {
-              image_one: file1,
-              image_two: file2
-            }
-          })
-        });
-
-        const data = await response.json();
-
-        if (data.error) {
-          alert('Fehler beim Generieren der Umarmung!');
-        } else {
-          document.getElementById('hugImage').src = data.output[0]; // The generated hug image
-          document.getElementById('hugResult').style.display = 'block';
-        }
-      } catch (error) {
-        console.error('Fehler beim Abrufen der Umarmung:', error);
-        alert('Es gab ein Problem beim Erzeugen der Umarmung.');
-      }
-    });
-  </script>
 </body>
 </html>
+<input type="file" id="imageOneInput" accept="image/*">
+<input type="file" id="imageTwoInput" accept="image/*">
+<button id="generateHugBtn">Generate Hug</button>
+<div id="hugResult" style="display: none;">
+    <h2>Your AI Hug:</h2>
+    <img id="hugImage" src="" alt="Generated Hug Image">
+</div>
