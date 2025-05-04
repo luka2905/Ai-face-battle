@@ -55,13 +55,21 @@ generateHugBtn.addEventListener('click', async () => {
     }
 
     try {
+        console.log('Uploading image1:', file1);
+        console.log('Uploading image2:', file2);
+
         // Bilder auf deinen Server hochladen
         const imageUrl1 = await uploadImage(file1);
         const imageUrl2 = await uploadImage(file2);
 
+        console.log('Uploaded image1 URL:', imageUrl1);
+        console.log('Uploaded image2 URL:', imageUrl2);
+
         // Replicate API (ersetze mit deinem API-Schlüssel und Modell-ID)
         const apiKey = "r8_2drzmtLeHWUVa5NsHsNv0fDU1NHDLx31yAHiW";
         const modelVersionId = "YOUR_MODEL_VERSION_ID";  // Modell-ID (AnimateDiff oder ControlNet)
+
+        console.log('Sending request to Replicate API with:', { image_one: imageUrl1, image_two: imageUrl2 });
 
         const response = await fetch('https://api.replicate.com/v1/predictions', {
             method: 'POST',
@@ -79,6 +87,8 @@ generateHugBtn.addEventListener('click', async () => {
         });
 
         const data = await response.json();
+
+        console.log('Replicate response:', data);
 
         if (data.error) {
             alert('Fehler beim Generieren der Umarmung!');
@@ -101,7 +111,7 @@ generateHugBtn.addEventListener('click', async () => {
             });
         }
     } catch (error) {
-        console.error('Fehler beim Abrufen der Umarmung:', error);
+        console.error('Error during hug generation:', error);
         alert('Es gab ein Problem beim Erzeugen der Umarmung.');
     }
 });
