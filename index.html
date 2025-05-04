@@ -94,14 +94,29 @@
     <button onclick="showPage('battle')">AI Face Battle starten</button>
     <button onclick="showPage('hug')">AI-Umarmungsvideo generieren</button>
   </div>
+<!-- Seite 1: AI Face Battle -->
+<div class="page" id="battle">
+  <h2>AI Face Battle</h2>
+  <p>Lade zwei Gesichter hoch und finde heraus, welches besser bewertet wird!</p>
 
-  <!-- Seite 1: AI Face Battle -->
-  <div class="page" id="battle">
-    <h2>AI Face Battle</h2>
-    <p>Hier kannst du zwei Bilder vergleichen und schauen, welches Gesicht besser aussieht.</p>
-    <!-- Hier später dein Vergleichs-Code einfügen -->
-    <button class="back-btn" onclick="goBack()">Zurück</button>
+  <input type="file" accept="image/*" onchange="previewBattleImage(event, 0)">
+  <input type="file" accept="image/*" onchange="previewBattleImage(event, 1)">
+  <br>
+  <button onclick="startBattle()">Vergleichen</button>
+
+  <div id="battleArea" style="margin-top: 20px; display: flex; gap: 20px; justify-content: center;">
+    <div id="face0" style="border: 3px solid transparent; border-radius: 15px;">
+      <img id="battleImg0" style="max-width: 150px; border-radius: 15px;">
+    </div>
+    <div id="face1" style="border: 3px solid transparent; border-radius: 15px;">
+      <img id="battleImg1" style="max-width: 150px; border-radius: 15px;">
+    </div>
   </div>
+
+  <button class="back-btn" onclick="goBack()">Zurück</button>
+</div>
+
+ 
 
   <!-- Seite 2: AI Hug Video Generator -->
   <div class="page" id="hug">
