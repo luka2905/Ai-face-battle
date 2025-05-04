@@ -1,24 +1,17 @@
-// Referenzen zu den HTML-Elementen
+// Dein Replicate API-Schlüssel
+const API_KEY = 'r8_2drzmtLeHWUVa5NsHsNv0fDU1NHDLx31yAHiW';  // Setze deinen API-Key hier
+
+// Button und Datei-Input Elemente
+const generateHugBtn = document.getElementById('generateHugBtn');
 const image1Input = document.getElementById('image1');
 const image2Input = document.getElementById('image2');
-const generateHugBtn = document.getElementById('generateHugBtn');
-const hugResult = document.getElementById('hugResult');
 
-// Bilder vorab anzeigen
-function previewImage(input) {
-    const file = input.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            input.style.display = 'block';  // Optional: Bild-Vorschau anzeigen
-            checkIfReadyToGenerate();
-        };
-        reader.readAsDataURL(file);
-    }
-}
+// Event Listener für Datei-Inputs
+image1Input.addEventListener('change', checkInputs);
+image2Input.addEventListener('change', checkInputs);
 
-// Überprüfen, ob beide Bilder hochgeladen wurden
-function checkIfReadyToGenerate() {
+// Überprüfe, ob beide Bilder hochgeladen wurden
+function checkInputs() {
     if (image1Input.files.length > 0 && image2Input.files.length > 0) {
         generateHugBtn.disabled = false;
     } else {
@@ -26,92 +19,41 @@ function checkIfReadyToGenerate() {
     }
 }
 
-// Event-Listener für Bild-Uploads
-image1Input.addEventListener('change', () => previewImage(image1Input));
-image2Input.addEventListener('change', () => previewImage(image2Input));
-
-// Funktion zum Hochladen von Bildern auf einen Server (z.B. Google Cloud, AWS S3, etc.)
-async function uploadImage(file) {
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const response = await fetch("https://your-server.com/upload", {
-        method: "POST",
-        body: formData
-    });
-
-    const result = await response.json();
-    return result.imageUrl; // Die URL des hochgeladenen Bildes
-}
-
-// Funktion zum Generieren der Umarmung
-generateHugBtn.addEventListener('click', async () => {
-    const file1 = image1Input.files[0];
-    const file2 = image2Input.files[0];
-
-    if (!file1 || !file2) {
-        alert("Bitte lade beide Bilder hoch.");
-        return;
-    }
-
+// Funktion, um die Umarmung zu generieren
+async function generateHug() {
+    const prompt = "A cute hamster lies leisurely on a lifebuoy, wearing fashionable sunglasses, and drifts with the gentle waves on the shimmering sea surface. The hamster reclines comfortably, enjoying a peaceful and pleasant time. Cartoon style, the camera follows the subject moving, with a heartwarming and high picture quality.";
+    
     try {
-        console.log('Uploading image1:', file1);
-        console.log('Uploading image2:', file2);
-
-        // Bilder auf deinen Server hochladen
-        const imageUrl1 = await uploadImage(file1);
-        const imageUrl2 = await uploadImage(file2);
-
-        console.log('Uploaded image1 URL:', imageUrl1);
-        console.log('Uploaded image2 URL:', imageUrl2);
-
-        // Replicate API (ersetze mit deinem API-Schlüssel und Modell-ID)
-        const apiKey = "r8_2drzmtLeHWUVa5NsHsNv0fDU1NHDLx31yAHiW";
-        const modelVersionId = "YOUR_MODEL_VERSION_ID";  // Modell-ID (AnimateDiff oder ControlNet)
-
-        console.log('Sending request to Replicate API with:', { image_one: imageUrl1, image_two: imageUrl2 });
-
-        const response = await fetch('https://api.replicate.com/v1/predictions', {
+        // Anfrage an die Replicate API
+        const response = await fetch('https://api.replicate.com/v1/models/kwaivgi/kling-v2.0/predictions', {
             method: 'POST',
             headers: {
-                'Authorization': `Token ${apiKey}`,
-                'Content-Type': 'application/json'
+                'Authorization': `Bearer ${API_KEY}`,
+                'Content-Type': 'application/json',
+                'Prefer': 'wait'
             },
             body: JSON.stringify({
-                version: modelVersionId,
-                input: {
-                    image_one: imageUrl1,
-                    image_two: imageUrl2
-                }
+                input: { prompt }
             })
         });
 
-        const data = await response.json();
+        const result = await response.json();
 
-        console.log('Replicate response:', data);
-
-        if (data.error) {
-            alert('Fehler beim Generieren der Umarmung!');
-        } else {
-            // Zeige das generierte Hug-Video (oder Bild)
-            const hugImage = document.createElement('img');
-            hugImage.src = data.output[0]; // Das generierte Hug-Bild
-            hugResult.innerHTML = '';  // Leere das Ergebnis-Feld
-            hugResult.appendChild(hugImage);  // Füge das Bild hinzu
-
-            // Event in Amplitude und Google Analytics aufzeichnen
-            amplitude.getInstance().logEvent('Hug Generated', {
-                'image1': imageUrl1,
-                'image2': imageUrl2
-            });
-
-            gtag('event', 'hug_generated', {
-                'image1': imageUrl1,
-                'image2': imageUrl2
-            });
+        // Zeige das generierte Ergebnis an (z.B. ein Bild oder Video)
+        if (result && result.output) {
+            console.log("Generiertes Ergebnis: ", result.output);
+            // Beispiel: Das Ergebnis könnte ein Bild sein, das du auf der Seite anzeigst
+            const hugResult = document.getElementById('hugResult'); // Das Element, wo das Ergebnis angezeigt wird
+            const img = document.createElement('img');
+            img.src = result.output[0]; // Das Bild oder Video von Replicate
+            hugResult.innerHTML = '';  // Alte Ergebnisse löschen
+            hugResult.appendChild(img);  // Füge das neue Bild hinzu
         }
     } catch (error) {
-        console.error('Error during hug generation:', error);
+        console.error('Fehler beim Abrufen der Umarmung:', error);
         alert('Es gab ein Problem beim Erzeugen der Umarmung.');
     }
-});
+}
+
+// Event-Listener für den Button
+generateHugBtn.addEventListener('click', generateHug);
