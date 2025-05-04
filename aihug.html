@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Umarmung – AI Tools</title>
+  <link rel="stylesheet" href="style.css"> <!-- Verlinkung zur CSS-Datei -->
+  <script src="script.js" defer></script> <!-- Verlinkung zur JS-Datei -->
+</head>
+<body>
+  <h1>AI Umarmung</h1>
+  <p>Wähle zwei Bilder und wir verwandeln sie in eine KI-generierte Umarmung.</p>
+  
+  <!-- Bereich für Bilder hochladen -->
+  <div class="upload-section">
+    <div class="upload-box">
+      <h3>Bild 1 hochladen</h3>
+      <input type="file" accept="image/*" id="imageOne" />
+      <img id="previewOne" class="preview" />
+    </div>
+    <div class="upload-box">
+      <h3>Bild 2 hochladen</h3>
+      <input type="file" accept="image/*" id="imageTwo" />
+      <img id="previewTwo" class="preview" />
+    </div>
+  </div>
+
+  <button id="generateHug">Umarmung generieren</button>
+
+  <!-- Ergebnisanzeige -->
+  <div id="hugResult"></div>
+</body>
+</html>
