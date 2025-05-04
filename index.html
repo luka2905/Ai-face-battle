@@ -1,115 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Face Battle</title>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DJ73ZJSSHG');
-  </script>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #3c1d5b);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 40px;
+    }
+
+    .menu, .page {
+      display: none;
+      text-align: center;
+      max-width: 800px;
+      width: 90%;
+      padding: 20px;
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+
+    .active {
+      display: block;
+    }
+
+    button {
+      margin: 10px;
+      padding: 15px 30px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff00cc, #3333ff);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .back-btn {
+      margin-top: 30px;
+      background: #555;
+    }
+
+    .video-preview {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    .video-preview img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 1s ease-in-out;
+    }
+
+    input[type="file"] {
+      margin: 10px;
+      background-color: white;
+      color: black;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🧠 AI Face Battle</h1>
 
-    <!-- Spieler Uploads -->
-    <div class="upload-section">
-      <div class="upload-box">
-        <h3>Picture 1</h3>
-        <input type="file" accept="image/*" id="playerOneInput" />
-        <img id="playerOnePreview" class="preview" />
-      </div>
-      <div class="upload-box">
-        <h3>Picture 2</h3>
-        <input type="file" accept="image/*" id="playerTwoInput" />
-        <img id="playerTwoPreview" class="preview" />
-      </div>
-    </div>
+  <h1>Willkommen bei AI Face Battle</h1>
 
-    <!-- Battle Button -->
-    <button id="battleBtn" disabled>Battle starten</button>
-
-    <!-- Ergebnisanzeige -->
-    <div id="result"></div>
-
-    <!-- Instagram-Link mit LK -->
-    <a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
-      LK
-    </a>
-
-    <!-- Nickname Overlay -->
-    <div id="nicknameOverlay" class="overlay">
-      <div class="nickname-box">
-        <h2>Choose your nickname</h2>
-        <input type="text" id="nicknameInput" placeholder="Enter nickname..." />
-        <button onclick="saveNickname()">Start</button>
-      </div>
-    </div>
-
-    <!-- Begrüßungstext nach Eingabe (Jetzt unten auf der Seite) -->
-    <div id="welcomeText" class="welcome-text">
-      <h2>Welcome back</h2>
-    </div>
-
-    <!-- Made in Georgia Box -->
-    <div class="made-in-georgia">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Georgia.svg" alt="Georgia Flag">
-      <span>Made in Georgia</span>
-    </div>
-
-    <!-- Privacy Policy Button -->
-    <button id="openPrivacyBtn" class="privacy-btn">Privacy Policy</button>
-   <!-- Privacy Policy Overlay -->
-    <div id="privacyOverlay" class="privacy-overlay">
-      <div class="privacy-content">
-        <button id="closePrivacyBtn" class="close-btn">&times;</button>
-        <h2>Privacy Policy of AI Face Battle</h2>
-        <p>We take the protection of your data very seriously. Below we explain which personal data is collected on our website <strong>www.ai-face-battle.de</strong> and how it is used.</p>
-
-        <h3>1. Data Controller</h3>
-        <p>Luka Chanturishvili<br>Email: <a href="mailto:llaaccessorieess@gmail.com">llaaccessorieess@gmail.com</a></p>
-
-        <h3>2. Data We Collect</h3>
-        <ul>
-          <li>The nickname you enter,
-           We collect anonymous nicknames for analytics purposes only. No personal data is stored.</li>
-        </ul>
-        <p>This data is used exclusively to display the results of the image comparison.</p>
-
-        <h3>3. Purpose of Data Processing</h3>
-        <p>The data is used solely for comparing the two images. There is <strong>no sharing</strong> of your data with third parties. Uploaded images are deleted after analysis and <strong>not permanently stored</strong>.</p>
-
-        <h3>4. Your Rights</h3>
-        <p>You have the right to access, correct, or delete your data at any time. Contact us via email if needed.</p>
-
-        <h3>5. Language and Validity</h3>
-        <p>This privacy policy is written in English and is intended for users worldwide.</p>
-
-        <p style="margin-top: 1rem;"><strong>Last updated:</strong> April 2025</p>
-      </div>
-    </div>
-    <div class="ad-banner">
-      <p>Your ad could be here – reach thousands of users every day! 
-        <a href="mailto:llaaccessorieess@gmail.com">Contact us</a>
-      </p>
-    </div>
+  <!-- Startmenü -->
+  <div class="menu active" id="menu">
+    <p>Wähle eine Option:</p>
+    <button onclick="showPage('battle')">AI Face Battle starten</button>
+    <button onclick="showPage('upload')">Bild-Upload mit Hinweis</button>
+    <button onclick="showPage('hug')">AI-Umarmungsvideo generieren</button>
   </div>
 
-  <!-- Amplitude Tracking Code -->
-  <script src="https://cdn.eu.amplitude.com/script/112dc8b790c791b0abce53244ac11739.js"></script>
+  <!-- Seite 1: AI Face Battle -->
+  <div class="page" id="battle">
+    <h2>AI Face Battle</h2>
+    <p>Hier kannst du zwei Bilder vergleichen und schauen, welches Gesicht besser aussieht.</p>
+    <!-- Hier später dein Vergleichs-Code einfügen -->
+    <button class="back-btn" onclick="goBack()">Zurück</button>
+  </div>
+
+  <!-- Seite 2: Bild-Upload Hinweis -->
+  <div class="page" id="upload">
+    <h2>Bild-Upload Hinweis</h2>
+    <p>Bitte laden Sie zwei Bilder mit gleichem Seitenverhältnis hoch, die jeweils nur eine Person zeigen.<br>
+    Oder laden Sie ein Bild hoch, das zwei Personen zeigt.</p>
+    <button class="back-btn" onclick="goBack()">Zurück</button>
+  </div>
+
+  <!-- Seite 3: AI Hug Video Generator -->
+  <div class="page" id="hug">
+    <h2>AI-Umarmungsvideo</h2>
+    <p>Generieren Sie AI-Umarmungsvideos aus Ihren Fotos.</p>
+    
+    <input type="file" accept="image/*" onchange="loadImage(event, 0)">
+    <input type="file" accept="image/*" onchange="loadImage(event, 1)">
+    <br>
+    <button onclick="generateVideo()">AI-Video generieren</button>
+
+    <div class="video-preview" id="videoBox">
+      <img id="img1" style="opacity: 1;">
+      <img id="img2" style="opacity: 0;">
+    </div>
+
+    <button class="back-btn" onclick="goBack()">Zurück</button>
+  </div>
+
   <script>
-    window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
-    window.amplitude.init('112dc8b790c791b0abce53244ac11739', {
-      "fetchRemoteConfig": true,
-      "serverZone": "EU",
-      "autocapture": true
-    });
+    function showPage(pageId) {
+      document.getElementById('menu').classList.remove('active');
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    function goBack() {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('menu').classList.add('active');
+    }
+
+    let images = [null, null];
+
+    function loadImage(event, index) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          images[index] = e.target.result;
+          document.getElementById('img' + (index + 1)).src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function generateVideo() {
+      if (!images[0] || !images[1]) {
+        alert("Bitte lade zwei Bilder hoch.");
+        return;
+      }
+
+      let img1 = document.getElementById('img1');
+      let img2 = document.getElementById('img2');
+      let step = 0;
+
+      img1.style.opacity = 1;
+      img2.style.opacity = 0;
+
+      const interval = setInterval(() => {
+        step++;
+        img1.style.opacity = step % 2 === 0 ? 1 : 0;
+        img2.style.opacity = step % 2 === 0 ? 0 : 1;
+        if (step > 5) clearInterval(interval); // Stop nach ein paar Wechseln
+      }, 1000);
+    }
   </script>
 
 </body>
