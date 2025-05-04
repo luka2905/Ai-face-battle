@@ -1,5 +1,5 @@
 // Dein Replicate API-Schlüssel
-const API_KEY = 'r8_2drzmtLeHWUVa5NsHsNv0fDU1NHDLx31yAHiW';  // Setze deinen API-Key hier
+const API_KEY = 'r8_eyA2QJVY20rK346DneyoSZNF9fv3tjq0Au3BG';  // Setze deinen API-Key hier
 
 // Button und Datei-Input Elemente
 const generateHugBtn = document.getElementById('generateHugBtn');
