@@ -173,3 +173,32 @@ openPrivacyBtn.addEventListener("click", () => {
 closePrivacyBtn.addEventListener("click", () => {
   privacyOverlay.style.display = "none";
 });
+let battleImages = [null, null];
+
+function previewBattleImage(event, index) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      battleImages[index] = e.target.result;
+      document.getElementById('battleImg' + index).src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+  }
+}
+
+function startBattle() {
+  if (!battleImages[0] || !battleImages[1]) {
+    alert("Bitte lade zwei Bilder hoch.");
+    return;
+  }
+
+  // Zufällige Auswahl – später durch AI ersetzen
+  const winner = Math.random() < 0.5 ? 0 : 1;
+
+  // Rahmen anzeigen
+  for (let i = 0; i < 2; i++) {
+    const faceDiv = document.getElementById('face' + i);
+    faceDiv.style.border = i === winner ? "3px solid #00ff99" : "3px solid transparent";
+  }
+}
