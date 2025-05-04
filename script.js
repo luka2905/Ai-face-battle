@@ -1,4 +1,4 @@
-// Get the input elements, preview images, battle button, and result field
+ // Get the input elements, preview images, battle button, and result field
 const playerOneInput = document.getElementById('playerOneInput');
 const playerTwoInput = document.getElementById('playerTwoInput');
 const playerOnePreview = document.getElementById('playerOnePreview');
@@ -18,7 +18,7 @@ function saveNickname() {
   if (nickname) {
     localStorage.setItem('nickname', nickname);
     nicknameOverlay.style.display = 'none';
-    welcomeText.textContent = `Welcome, ${nickname}!`;
+    welcomeText.textContent = Welcome, ${nickname}!;
 
     // Track nickname with Google Analytics
     gtag('event', 'set_nickname', {
@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedNickname = localStorage.getItem('nickname');
   if (savedNickname) {
     nicknameOverlay.style.display = 'none';
-    welcomeText.textContent = `Welcome back, ${savedNickname}!`;
+    welcomeText.textContent = Welcome back, ${savedNickname}!;
   }
 
   // Add event listener for the Start button in the nickname overlay
@@ -139,7 +139,7 @@ battleBtn.addEventListener('click', () => {
       resultText = "It's a tie! Both images are the same.";
     } else {
       const winner = Math.random() < 0.5 ? "Image 1" : "Image 2";
-      resultText = `${winner} looks better! 🎉`;
+      resultText = ${winner} looks better! 🎉;
     }
 
     resultDiv.textContent = resultText;
@@ -157,7 +157,7 @@ battleBtn.addEventListener('click', () => {
 
   }).catch(err => {
     console.error("Image comparison error:", err);
-    resultDiv.textContent = `Error comparing images: ${err}`;
+    resultDiv.textContent = Error comparing images: ${err};
   });
 });
 
@@ -223,7 +223,7 @@ document.getElementById('generateHugBtn').addEventListener('click', async () => 
         const response = await fetch('https://api.replicate.com/v1/predictions', {
             method: 'POST',
             headers: {
-                'Authorization': `Token ${apiKey}`,
+                'Authorization': Token ${apiKey},
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -276,7 +276,7 @@ document.getElementById('generateHugBtn').addEventListener('click', async () => 
         const response = await fetch('https://api.replicate.com/v1/predictions', {
             method: 'POST',
             headers: {
-                'Authorization': `Token ${apiKey}`,
+                'Authorization': Token ${apiKey},
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
