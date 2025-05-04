@@ -1,6 +1,7 @@
 /* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
+/* General Layout */
 body {
   margin: 0;
   padding: 0;
@@ -14,7 +15,7 @@ body {
   padding-bottom: 80px;
 }
 
-/* Container für alles */
+/* Container for the content */
 .container {
   text-align: center;
   padding: 20px;
@@ -22,7 +23,7 @@ body {
   width: 100%;
 }
 
-/* Titel */
+/* Title */
 h1 {
   font-size: 2.5rem;
   margin-bottom: 30px;
@@ -32,7 +33,7 @@ h1 {
   animation: fadeIn 1s ease-in-out;
 }
 
-/* Upload Abschnitt */
+/* Upload Section */
 .upload-section {
   display: flex;
   flex-direction: column;
@@ -49,7 +50,7 @@ h1 {
   text-align: center;
 }
 
-/* Dateieingabe */
+/* File Input */
 input[type="file"] {
   margin-top: 10px;
   background-color: #ff00c8;
@@ -59,7 +60,7 @@ input[type="file"] {
   cursor: pointer;
 }
 
-/* Bildvorschau (rund mit Leuchteffekt) */
+/* Preview Image (Round with Glow Effect) */
 .preview {
   width: 160px;
   height: 160px;
@@ -76,8 +77,8 @@ input[type="file"] {
   box-shadow: 0 0 25px rgba(255, 0, 204, 0.8);
 }
 
-/* Battle Button */
-#battleBtn {
+/* Hug Button */
+#hugBtn {
   background: linear-gradient(to right, #ff00cc, #3333ff);
   border: none;
   color: white;
@@ -88,19 +89,19 @@ input[type="file"] {
   transition: 0.3s ease;
 }
 
-#battleBtn:hover {
+#hugBtn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(255, 0, 204, 0.6);
 }
 
-/* Ergebnis Anzeige */
+/* Result Display */
 #result {
   font-size: 24px;
   margin-top: 20px;
   color: #fff;
 }
 
-/* Werbebereich */
+/* Advertising Section */
 .advertising-section {
   margin-top: 40px;
   text-align: center;
@@ -113,7 +114,7 @@ input[type="file"] {
   text-decoration: none;
 }
 
-/* Firmenlogo (Instagram-Link) */
+/* Company Logo (Instagram-Link) */
 #company-logo {
   position: fixed;
   top: 15px;
@@ -138,7 +139,7 @@ input[type="file"] {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobile-Optimierung */
+/* Mobile Optimization */
 @media (max-width: 600px) {
   h1 {
     font-size: 2rem;
@@ -149,7 +150,7 @@ input[type="file"] {
     height: 120px;
   }
 
-  #battleBtn {
+  #hugBtn {
     width: 100%;
   }
 
@@ -203,13 +204,7 @@ input[type="file"] {
   cursor: pointer;
 }
 
-.welcome-text {
-  text-align: center;
-  color: white;
-  margin-top: 1rem;
-  font-size: 1.2rem;
-}
-
+/* Made in Georgia section */
 .made-in-georgia {
   position: fixed;
   bottom: 73px;
@@ -222,7 +217,7 @@ input[type="file"] {
   border-radius: 10px;
   font-size: 0.7rem;
   color: #fff;
-  z-index: 1001; /* Höher als der Werbebanner */
+  z-index: 1001;
 }
 
 .made-in-georgia img {
@@ -232,18 +227,18 @@ input[type="file"] {
   border-radius: 4px;
 }
 
-/* Privacy Button und Overlay */
+/* Privacy Button and Overlay */
 .privacy-btn {
-    position: relative;
-    bottom: -70px;
-    left: 0px;
-    background: linear-gradient(to right, #ff00cc, #3333ff);
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
-    cursor: pointer;
-    z-index: 1001;
+  position: relative;
+  bottom: -70px;
+  left: 0px;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 1001;
 }
 
 .privacy-overlay {
@@ -284,7 +279,7 @@ input[type="file"] {
   cursor: pointer;
 }
 
-/* Werbebanner */
+/* Advertising Banner */
 .ad-banner {
   position: fixed;
   bottom: 0;
@@ -297,8 +292,7 @@ input[type="file"] {
   padding: 10px;
   font-size: 0.9rem;
   border-top: 1px solid #ff00cc;
-  z-index: 1000; /* Jetzt niedriger als der Made in Georgia und Privacy Button */
-  font-family: 'Arial', sans-serif;
+  z-index: 1000;
 }
 
 .ad-banner a {
