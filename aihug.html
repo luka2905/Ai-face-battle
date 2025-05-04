@@ -4,30 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Hug Generator</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        input[type="file"] {
+            margin: 10px;
+        }
+        #generateHugBtn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #generateHugBtn:disabled {
+            background-color: #ccc;
+        }
+        #hugResult {
+            margin-top: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <h1>AI Hug Generator</h1>
-    <p>Lade zwei Bilder hoch, um eine Umarmung zu generieren:</p>
 
-    <!-- Bild 1 Upload -->
+    <label for="image1">Bild 1 (z.B. dein Foto):</label>
     <input type="file" id="image1" accept="image/*">
-    <img id="image1Preview" style="display:none; width: 200px;" />
     <br>
 
-    <!-- Bild 2 Upload -->
+    <label for="image2">Bild 2 (z.B. ein Foto einer berühmten Person):</label>
     <input type="file" id="image2" accept="image/*">
-    <img id="image2Preview" style="display:none; width: 200px;" />
     <br>
 
-    <!-- Button zum Generieren der Umarmung -->
-    <button id="generateHugBtn" disabled>Generiere Umarmung</button>
+    <button id="generateHugBtn" disabled>Umarmung generieren</button>
 
-    <h2>Ergebnis:</h2>
-    <div id="hugResult">
-        <!-- Hier wird das generierte Hug-Video erscheinen -->
-    </div>
+    <div id="hugResult"></div>
 
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-DJ73ZJSSHG');
+    </script>
+
+    <!-- Amplitude -->
+    <script type="text/javascript">
+        (function(e,t){var n=e.amplitude||[];e.amplitude=n;var r=t.createElement("script");r.type="text/javascript";r.async=true;r.src="https://cdn.amplitude.com/libs/amplitude-5.0.0-min.js";var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)})(window,document);
+        amplitude.getInstance().init("112dc8b790c791b0abce53244ac11739");
+    </script>
+
+    <!-- Verlinke die app.js Datei -->
     <script src="app.js"></script>
 </body>
 </html>
