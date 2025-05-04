@@ -14,20 +14,72 @@
   <!-- Bereich für Bilder hochladen -->
   <div class="upload-section">
     <div class="upload-box">
-      <h3>Bild 1 hochladen</h3>
-      <input type="file" accept="image/*" id="imageOne" />
-      <img id="previewOne" class="preview" />
+      <h3>Bild 1 (Dein Bild)</h3>
+      <input type="file" accept="image/*" id="imageOneInput">
+      <img id="imageOnePreview" class="preview" />
     </div>
     <div class="upload-box">
-      <h3>Bild 2 hochladen</h3>
-      <input type="file" accept="image/*" id="imageTwo" />
-      <img id="previewTwo" class="preview" />
+      <h3>Bild 2 (Berühmte Person)</h3>
+      <input type="file" accept="image/*" id="imageTwoInput">
+      <img id="imageTwoPreview" class="preview" />
     </div>
   </div>
 
-  <button id="generateHug">Umarmung generieren</button>
+  <!-- Umarmung generieren -->
+  <button id="generateHugBtn">Generiere Umarmung</button>
 
-  <!-- Ergebnisanzeige -->
-  <div id="hugResult"></div>
+  <!-- Ergebnis -->
+  <div id="hugResult" style="display: none;">
+    <h2>Deine KI-Umarmung:</h2>
+    <img id="hugImage" src="" alt="Generated Hug Image">
+  </div>
+
+  <script>
+    document.getElementById('generateHugBtn').addEventListener('click', async () => {
+      const file1 = document.getElementById('imageOneInput').files[0];
+      const file2 = document.getElementById('imageTwoInput').files[0];
+
+      if (!file1 || !file2) {
+        alert("Bitte lade zwei Bilder hoch.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('image_one', file1);
+      formData.append('image_two', file2);
+
+      // Hier solltest du deinen API-Schlüssel von Replicate einfügen
+      const apiKey = "DEIN_API_KEY"; // Setze hier deinen API-Key ein
+
+      try {
+        const response = await fetch('https://api.replicate.com/v1/predictions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Token ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            version: 'VERSION_ID_DEINER_MODELLS', // Setze hier die Modell-ID ein
+            input: {
+              image_one: formData.get('image_one'),
+              image_two: formData.get('image_two')
+            }
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          alert('Fehler beim Generieren der Umarmung!');
+        } else {
+          document.getElementById('hugImage').src = data.output[0]; // Das Bild aus dem API-Response
+          document.getElementById('hugResult').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Fehler beim Abrufen der Umarmung:', error);
+        alert('Es gab ein Problem beim Erzeugen der Umarmung.');
+      }
+    });
+  </script>
 </body>
 </html>
