@@ -202,3 +202,102 @@ function startBattle() {
     faceDiv.style.border = i === winner ? "3px solid #00ff99" : "3px solid transparent";
   }
 }
+document.getElementById('generateHugBtn').addEventListener('click', async () => {
+    const file1 = document.getElementById('imageOneInput').files[0];
+    const file2 = document.getElementById('imageTwoInput').files[0];
+
+    if (!file1 || !file2) {
+        alert("Bitte lade zwei Bilder hoch.");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('image_one', file1);
+    formData.append('image_two', file2);
+
+    // Replace with your Replicate API key and model version ID
+    const apiKey = "YOUR_REPLICATE_API_KEY";
+    const modelVersionId = "YOUR_MODEL_VERSION_ID";
+
+    try {
+        const response = await fetch('https://api.replicate.com/v1/predictions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${apiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                version: modelVersionId,
+                input: {
+                    image_one: file1,
+                    image_two: file2
+                }
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            alert('Fehler beim Generieren der Umarmung!');
+        } else {
+            document.getElementById('hugImage').src = data.output[0]; // The generated hug image
+            document.getElementById('hugResult').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Umarmung:', error);
+        alert('Es gab ein Problem beim Erzeugen der Umarmung.');
+    }
+});
+const storageRef = firebase.storage().ref();
+
+function uploadImage(file) {
+    const fileRef = storageRef.child('uploads/' + file.name);
+    return fileRef.put(file).then(snapshot => snapshot.ref.getDownloadURL());
+}
+
+document.getElementById('generateHugBtn').addEventListener('click', async () => {
+    const file1 = document.getElementById('imageOneInput').files[0];
+    const file2 = document.getElementById('imageTwoInput').files[0];
+
+    if (!file1 || !file2) {
+        alert("Bitte lade zwei Bilder hoch.");
+        return;
+    }
+
+    try {
+        // Upload images to Firebase Storage
+        const imageUrl1 = await uploadImage(file1);
+        const imageUrl2 = await uploadImage(file2);
+
+        // Now send the URLs to Replicate API
+        const apiKey = "YOUR_REPLICATE_API_KEY";
+        const modelVersionId = "YOUR_MODEL_VERSION_ID";
+
+        const response = await fetch('https://api.replicate.com/v1/predictions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Token ${apiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                version: modelVersionId,
+                input: {
+                    image_one: imageUrl1,
+                    image_two: imageUrl2
+                }
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+            alert('Fehler beim Generieren der Umarmung!');
+        } else {
+            document.getElementById('hugImage').src = data.output[0]; // The generated hug image
+            document.getElementById('hugResult').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Fehler beim Abrufen der Umarmung:', error);
+        alert('Es gab ein Problem beim Erzeugen der Umarmung.');
+    }
+});
