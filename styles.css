@@ -307,3 +307,83 @@ input[type="file"] {
     padding: 8px;
   }
 }
+/* Basisstile für die Seite */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+/* Container für den Inhalt */
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling für das Titel-Tag */
+h1 {
+    text-align: center;
+    color: #4CAF50;
+    font-size: 2rem;
+}
+
+/* Styling für die Input-Felder und Labels */
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+/* Button für die Umarmungsgenerierung */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Styling für das Ergebnis */
+#hugResult {
+    margin-top: 20px;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
