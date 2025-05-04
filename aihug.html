@@ -4,53 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Hug Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 20px;
-        }
-        h1 {
-            color: #333;
-        }
-        input[type="file"] {
-            margin: 10px;
-        }
-        #generateHugBtn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        #generateHugBtn:disabled {
-            background-color: #ccc;
-        }
-        #hugResult {
-            margin-top: 20px;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Verlinke zu einer externen CSS-Datei -->
 </head>
 <body>
-    <h1>AI Hug Generator</h1>
+    <div class="container">
+        <h1>AI Hug Generator</h1>
 
-    <label for="image1">Bild 1 (z.B. dein Foto):</label>
-    <input type="file" id="image1" accept="image/*">
-    <br>
+        <div class="input-group">
+            <label for="image1">Bild 1 (z. B. dein Foto):</label>
+            <input type="file" id="image1" accept="image/*">
+        </div>
 
-    <label for="image2">Bild 2 (z.B. ein Foto einer berühmten Person):</label>
-    <input type="file" id="image2" accept="image/*">
-    <br>
+        <div class="input-group">
+            <label for="image2">Bild 2 (z. B. ein Foto einer berühmten Person):</label>
+            <input type="file" id="image2" accept="image/*">
+        </div>
 
-    <button id="generateHugBtn" disabled>Umarmung generieren</button>
+        <button id="generateHugBtn" disabled>Umarmung generieren</button>
 
-    <div id="hugResult"></div>
+        <div id="hugResult"></div>
+    </div>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
@@ -67,7 +40,7 @@
         amplitude.getInstance().init("112dc8b790c791b0abce53244ac11739");
     </script>
 
-    <!-- Verlinke die app.js Datei -->
+    <!-- JavaScript-Datei -->
     <script src="app.js"></script>
 </body>
 </html>
