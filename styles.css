@@ -1,1 +1,22 @@
-
+body {
+  background: #111;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+canvas {
+  margin-top: 20px;
+  max-width: 100%;
+  border: 2px solid #fff;
+}
+input, button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
