@@ -1,50 +1,72 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Willkommen – AI Tools</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      font-family: sans-serif;
-      background: linear-gradient(to right, #1f1c2c, #928dab);
-      color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .button {
-      background: #6a11cb;
-      background: linear-gradient(to right, #2575fc, #6a11cb);
-      padding: 1rem 2rem;
-      margin: 1rem;
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      transition: transform 0.2s;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      transform: scale(1.05);
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Face Battle</title>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DJ73ZJSSHG');
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <h1>Willkommen auf AI Tools</h1>
-  <a class="button" href="facebattle.html">🧠 AI Face Battle</a>
-  <a class="button" href="aihug.html">🖌️ AI Sketchify</a>
-</body>
+  <div class="container">
+    <h1>🧠 AI Face Battle</h1>
+
+    <!-- Spieler Uploads -->
+    <div class="upload-section">
+      <div class="upload-box">
+        <h3>Picture 1</h3>
+        <input type="file" accept="image/*" id="playerOneInput" />
+        <img id="playerOnePreview" class="preview" />
+      </div>
+      <div class="upload-box">
+        <h3>Picture 2</h3>
+        <input type="file" accept="image/*" id="playerTwoInput" />
+        <img id="playerTwoPreview" class="preview" />
+      </div>
+    </div>
+
+    <!-- Battle Button -->
+    <button id="battleBtn" disabled>Battle starten</button>
+
+    <!-- Ergebnisanzeige -->
+    <div id="result"></div>
+
+    <!-- Instagram-Link mit LK -->
+    <a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
+      LK
+    </a>
+
+    <!-- Nickname Overlay -->
+    <div id="nicknameOverlay" class="overlay">
+      <div class="nickname-box">
+        <h2>Choose your nickname</h2>
+        <input type="text" id="nicknameInput" placeholder="Enter nickname..." />
+        <button onclick="saveNickname()">Start</button>
+      </div>
+    </div>
+
+    <!-- Begrüßungstext nach Eingabe (Jetzt unten auf der Seite) -->
+    <div id="welcomeText" class="welcome-text">
+      <h2>Welcome back</h2>
+    </div>
+
+    <!-- Made in Georgia Box -->
+    <div class="made-in-georgia">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Georgia.svg" alt="Georgia Flag">
+      <span>Made in Georgia</span>
+    </div>
+
+    <!-- Privacy Policy Button -->
+    <button id="openPrivacyBtn" class="privacy-btn">Privacy Policy</button>
+   <!-- Privacy Policy Overlay -->
+    <div id="privacyOverlay" class="privacy-overlay">
+      <div class="privacy-content">
+        <button id="closePrivacyBtn" class="close-btn">&times;</button>
+        <h2>Privacy Policy of AI Face Battle</h2>
