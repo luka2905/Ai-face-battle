@@ -1,109 +1,311 @@
-/* Google Font */ 
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap'); 
+* {
+  box-sizing: border-box;
+}
 
- 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
 
-body { 
+/* Container */
+.container {
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+}
 
-  margin: 0; 
+/* Titel */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: fadeIn 1s ease-in-out;
+}
 
-  padding: 0; 
+/* Upload Bereich */
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 30px;
+}
 
-  font-family: 'Orbitron', sans-serif; 
+.upload-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #ff00cc;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(255, 0, 204, 0.2);
+}
 
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); 
+input[type="file"] {
+  margin-top: 10px;
+  background-color: #ff00c8;
+  color: #000;
+  border-radius: 5px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border: none;
+}
 
-  color: #fff; 
+/* Bild Vorschau */
+.preview {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ff00cc;
+  box-shadow: 0 0 20px rgba(255, 0, 204, 0.5);
+  margin-top: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-  display: flex; 
+.preview:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 204, 0.8);
+}
 
-  flex-direction: column; 
+/* Battle Button */
+#battleBtn {
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-top: 10px;
+}
 
-  align-items: center; 
+#battleBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 0, 204, 0.6);
+}
 
-  min-height: 100vh; 
+/* Ergebnis */
+#result {
+  font-size: 24px;
+  margin-top: 20px;
+}
 
-  padding-bottom: 80px; 
+/* Instagram-Logo */
+#company-logo {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-decoration: none;
+  z-index: 999;
+  transition: transform 0.3s ease;
+}
 
-} 
+#company-logo:hover {
+  transform: scale(1.2);
+}
 
- 
+/* Nickname Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 10, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
-/* Container für alles */ 
+.nickname-box {
+  background: linear-gradient(135deg, #6a00f4, #ff00c8);
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
 
-.container { 
+.nickname-box h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
 
-  text-align: center; 
+.nickname-box input {
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: none;
+  width: 80%;
+  margin-bottom: 1rem;
+}
 
-  padding: 20px; 
+.nickname-box button {
+  background: white;
+  color: #6a00f4;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  max-width: 600px; 
+/* Datenschutz Button */
+.privacy-btn {
+  position: fixed;
+  bottom: 69px;
+  right: 20px;
+  background: linear-gradient(to right, #ff00cc, #3333ff);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
 
-  width: 100%; 
+/* Datenschutz Overlay */
+.privacy-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+  padding: 2rem;
+  font-family: 'Orbitron', sans-serif;
+}
 
-} 
+.privacy-content {
+  background: #1f1f2f;
+  color: #fff;
+  max-width: 700px;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 12px;
+  position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+  box-shadow: 0 0 25px rgba(255, 0, 204, 0.3);
+}
 
- 
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  color: #fff;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
 
-/* Titel */ 
+.close-btn:hover {
+  color: #ff00cc;
+}
 
-h1 { 
+/* Made in Georgia */
+.made-in-georgia {
+  position: fixed;
+  bottom: 69px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  color: #fff;
+  z-index: 1001;
+}
 
-  font-size: 2.5rem; 
+.made-in-georgia img {
+  width: 24px;
+  border-radius: 4px;
+  border: 1px solid white;
+}
 
-  margin-bottom: 30px; 
+/* Werbebanner unten */
+.ad-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 0, 204, 0.15);
+  backdrop-filter: blur(6px);
+  color: #b52899;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-top: 1px solid #ff00cc;
+  z-index: 1000;
+  font-family: 'Arial', sans-serif;
+}
 
-  background: linear-gradient(to right, #ff00cc, #3333ff); 
+.ad-banner a {
+  color: #b52899;
+  text-decoration: underline;
+}
 
-  -webkit-background-clip: text; 
+/* Mobile Optimierung */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+  }
 
-  color: transparent; 
+  .preview {
+    width: 120px;
+    height: 120px;
+  }
 
-  animation: fadeIn 1s ease-in-out; 
+  #battleBtn {
+    width: 100%;
+  }
 
-} 
+  .upload-box {
+    padding: 15px;
+  }
 
- 
+  .privacy-content {
+    padding: 1rem;
+  }
 
-/* Upload Abschnitt */ 
+  .close-btn {
+    font-size: 1.3rem;
+    top: 8px;
+    right: 10px;
+  }
 
-.upload-section { 
+  .ad-banner {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
+}
 
-  display: flex; 
-
-  flex-direction: column; 
-
-  gap: 30px; 
-
-  margin-bottom: 30px; 
-
-} 
-
- 
-
-.upload-box { 
-
-  background: rgba(255, 255, 255, 0.05); 
-
-  padding: 20px; 
-
-  border-radius: 20px; 
-
-  border: 1px solid #ff00cc; 
-
-  box-shadow: 0 0 15px rgba(255, 0, 204, 0.2); 
-
-  text-align: center; 
-
-} 
-
- 
-
-/* Dateieingabe */ 
-
-input[type="file"] { 
-
-  margin-top: 10px; 
-
-  background-color: #ff00c8; 
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
