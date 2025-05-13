@@ -14,14 +14,22 @@
     gtag('config', 'G-DJ73ZJSSHG');
   </script>
 
-<!-- Amplitude Classic SDK -->
-<script src="https://cdn.amplitude.com/libs/amplitude-8.17.0-min.gz.js"></script>
-<script>
-  // Initialisiere Amplitude mit deinem neuen API-Key
-  amplitude.getInstance().init("3d6990ee04cb15210273ee7dd02b52ac");
-</script>
+  <!-- Amplitude SDK -->
+  <script src="https://cdn.amplitude.com/libs/amplitude-8.17.0-min.gz.js"></script>
+  <script>
+    // Initialize Amplitude with your Project API Key
+    amplitude.getInstance().init("3d6990ee04cb15210273ee7dd02b52ac", null, {
+      defaultTracking: true // Automatic session and device tracking
+    });
 
- <link rel="stylesheet" href="style.css" />
+    // Optionally, set a custom user ID for tracking
+    // amplitude.getInstance().setUserId("nickname123");  // Uncomment if using nickname
+
+    // Log a test event to confirm setup
+    amplitude.getInstance().logEvent("page_loaded");
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -45,7 +53,7 @@
     <!-- Battle button -->
     <button id="battleBtn" disabled>Battle starten</button>
 
-    <!-- Ergebnis -->
+    <!-- Result -->
     <div id="result"></div>
 
     <!-- Nickname Overlay -->
@@ -57,15 +65,15 @@
       </div>
     </div>
 
-    <!-- Willkommen -->
+    <!-- Welcome message -->
     <div id="welcomeText" class="welcome-text"></div>
 
-    <!-- Werbung -->
+    <!-- Ad banner -->
     <div class="ad-banner">
       <p><a href="mailto:llaaccessorieess@gmail.com" style="color: white;">Your ad could be here.</a></p>
     </div>
 
-    <!-- Datenschutz -->
+    <!-- Privacy policy -->
     <button id="openPrivacyBtn" class="privacy-btn">Privacy Policy</button>
     <div id="privacyOverlay" class="privacy-overlay">
       <div class="privacy-content">
