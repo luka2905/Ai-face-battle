@@ -1,4 +1,4 @@
-// Elemente abrufen
+// Get the input elements, preview images, battle button, and result field
 const playerOneInput = document.getElementById('playerOneInput');
 const playerTwoInput = document.getElementById('playerTwoInput');
 const playerOnePreview = document.getElementById('playerOnePreview');
@@ -8,10 +8,11 @@ const resultDiv = document.getElementById('result');
 const nicknameOverlay = document.getElementById('nicknameOverlay');
 const welcomeText = document.getElementById('welcomeText');
 
+// Track previous image comparison hash
 let previousHash = null;
 let previousResult = null;
 
-// Nickname speichern
+// Save nickname function
 function saveNickname() {
   const nickname = document.getElementById('nicknameInput').value.trim();
   if (nickname) {
@@ -19,27 +20,31 @@ function saveNickname() {
     nicknameOverlay.style.display = 'none';
     welcomeText.textContent = `Welcome, ${nickname}!`;
 
-    // Tracking mit GA und Amplitude
-    gtag('event', 'set_nickname', { nickname });
-    amplitude.getInstance().logEvent('nickname_set', { nickname });
+    // Amplitude tracking (set user ID for the session)
+    amplitude.getInstance().setUserId(nickname);
+
+    // Google Analytics tracking
+    gtag('event', 'set_nickname', {
+      nickname: nickname
+    });
   }
 }
 
-// Bei Seitenstart gespeicherten Nickname anzeigen
+// Show nickname if already saved
 window.addEventListener('DOMContentLoaded', () => {
   const savedNickname = localStorage.getItem('nickname');
   if (savedNickname) {
     nicknameOverlay.style.display = 'none';
     welcomeText.textContent = `Welcome back, ${savedNickname}!`;
+    amplitude.getInstance().setUserId(savedNickname);  // Set user ID on Amplitude
   }
 
+  // Start button event
   const startButton = document.querySelector("#nicknameOverlay button");
   startButton.addEventListener("click", saveNickname);
-
-  amplitude.getInstance().logEvent("page_loaded");
 });
 
-// Bild-Vorschau anzeigen
+// Display image preview
 function displayImagePreview(input, preview) {
   const file = input.files[0];
   const reader = new FileReader();
@@ -55,25 +60,29 @@ function displayImagePreview(input, preview) {
   }
 }
 
-// Battle-Button aktivieren
+// Enable battle button only if both images are uploaded
 function checkBattleReady() {
   battleBtn.disabled = !(playerOneInput.files.length > 0 && playerTwoInput.files.length > 0);
 }
 
-// Upload Events tracken
+// Image upload event listeners
 playerOneInput.addEventListener('change', () => {
   displayImagePreview(playerOneInput, playerOnePreview);
-  amplitude.getInstance().logEvent('image_uploaded', { player: '1' });
-  gtag('event', 'upload_image', { 'event_category': 'Image 1' });
+  gtag('event', 'upload_image', {
+    'event_category': 'Image 1',
+    'event_label': 'Image Uploaded'
+  });
 });
 
 playerTwoInput.addEventListener('change', () => {
   displayImagePreview(playerTwoInput, playerTwoPreview);
-  amplitude.getInstance().logEvent('image_uploaded', { player: '2' });
-  gtag('event', 'upload_image', { 'event_category': 'Image 2' });
+  gtag('event', 'upload_image', {
+    'event_category': 'Image 2',
+    'event_label': 'Image Uploaded'
+  });
 });
 
-// Bilder vergleichen (ob gleich)
+// Compare two images with FileReader
 function areImagesEqual(file1, file2) {
   return new Promise((resolve, reject) => {
     const reader1 = new FileReader();
@@ -92,12 +101,12 @@ function areImagesEqual(file1, file2) {
   });
 }
 
-// Dateiname-Hash
+// Simple hash using file names
 function getFileHash(file1, file2) {
   return file1.name + '_' + file2.name;
 }
 
-// Battle starten
+// Battle logic
 battleBtn.addEventListener('click', () => {
   const file1 = playerOneInput.files[0];
   const file2 = playerTwoInput.files[0];
@@ -108,13 +117,16 @@ battleBtn.addEventListener('click', () => {
   }
 
   const currentHash = getFileHash(file1, file2);
+
   if (currentHash === previousHash) {
     resultDiv.textContent = previousResult;
     return;
   }
 
-  amplitude.getInstance().logEvent("battle_started");
-  gtag('event', 'start', { 'event_category': 'Game' });
+  gtag('event', 'start', {
+    'event_category': 'Game',
+    'event_label': 'Generate Started'
+  });
 
   areImagesEqual(file1, file2).then(equal => {
     let resultText;
@@ -129,9 +141,12 @@ battleBtn.addEventListener('click', () => {
     previousHash = currentHash;
     previousResult = resultText;
 
-    // Ergebnis tracken
-    amplitude.getInstance().logEvent("battle_result", { result: resultText });
-    gtag('event', 'battle_result', { 'event_category': 'Game', 'event_label': resultText });
+    gtag('event', 'battle_result', {
+      'event_category': 'Game',
+      'event_label': resultText
+    });
+
+    amplitude.getInstance().logEvent('battle_result', { result: resultText });  // Log event in Amplitude
 
   }).catch(err => {
     console.error("Image comparison error:", err);
@@ -139,10 +154,15 @@ battleBtn.addEventListener('click', () => {
   });
 });
 
-// Datenschutz-Overlay
-document.getElementById("openPrivacyBtn").addEventListener("click", () => {
-  document.getElementById("privacyOverlay").style.display = "flex";
+// Privacy Policy overlay logic
+const openPrivacyBtn = document.getElementById("openPrivacyBtn");
+const privacyOverlay = document.getElementById("privacyOverlay");
+const closePrivacyBtn = document.getElementById("closePrivacyBtn");
+
+openPrivacyBtn.addEventListener("click", () => {
+  privacyOverlay.style.display = "flex";
 });
-document.getElementById("closePrivacyBtn").addEventListener("click", () => {
-  document.getElementById("privacyOverlay").style.display = "none";
+
+closePrivacyBtn.addEventListener("click", () => {
+  privacyOverlay.style.display = "none";
 });
