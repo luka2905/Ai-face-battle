@@ -24,6 +24,11 @@ function saveNickname() {
     gtag('event', 'set_nickname', {
       nickname: nickname
     });
+
+    // Amplitude tracking
+    amplitude.getInstance().logEvent('set_nickname', {
+      nickname: nickname
+    });
   }
 }
 
@@ -64,7 +69,9 @@ function checkBattleReady() {
 // Image upload event listeners
 playerOneInput.addEventListener('change', () => {
   displayImagePreview(playerOneInput, playerOnePreview);
-  gtag('event', 'upload_image', {
+  
+  // Amplitude tracking
+  amplitude.getInstance().logEvent('upload_image', {
     'event_category': 'Image 1',
     'event_label': 'Image Uploaded'
   });
@@ -72,7 +79,9 @@ playerOneInput.addEventListener('change', () => {
 
 playerTwoInput.addEventListener('change', () => {
   displayImagePreview(playerTwoInput, playerTwoPreview);
-  gtag('event', 'upload_image', {
+  
+  // Amplitude tracking
+  amplitude.getInstance().logEvent('upload_image', {
     'event_category': 'Image 2',
     'event_label': 'Image Uploaded'
   });
@@ -114,12 +123,19 @@ battleBtn.addEventListener('click', () => {
 
   const currentHash = getFileHash(file1, file2);
 
+  // Check if the current comparison is the same as the previous one
   if (currentHash === previousHash) {
     resultDiv.textContent = previousResult;
     return;
   }
 
   gtag('event', 'start', {
+    'event_category': 'Game',
+    'event_label': 'Generate Started'
+  });
+
+  // Amplitude tracking
+  amplitude.getInstance().logEvent('game_start', {
     'event_category': 'Game',
     'event_label': 'Generate Started'
   });
@@ -138,6 +154,12 @@ battleBtn.addEventListener('click', () => {
     previousResult = resultText;
 
     gtag('event', 'battle_result', {
+      'event_category': 'Game',
+      'event_label': resultText
+    });
+
+    // Amplitude tracking
+    amplitude.getInstance().logEvent('battle_result', {
       'event_category': 'Game',
       'event_label': resultText
     });
