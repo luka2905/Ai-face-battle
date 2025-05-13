@@ -1,4 +1,3 @@
-// Get the input elements, preview images, battle button, and result field
 const playerOneInput = document.getElementById('playerOneInput');
 const playerTwoInput = document.getElementById('playerTwoInput');
 const playerOnePreview = document.getElementById('playerOnePreview');
@@ -8,177 +7,127 @@ const resultDiv = document.getElementById('result');
 const nicknameOverlay = document.getElementById('nicknameOverlay');
 const welcomeText = document.getElementById('welcomeText');
 
-// Track previous image comparison hash
 let previousHash = null;
 let previousResult = null;
 
-// Save nickname function
+// Nickname speichern
 function saveNickname() {
   const nickname = document.getElementById('nicknameInput').value.trim();
   if (nickname) {
     localStorage.setItem('nickname', nickname);
     nicknameOverlay.style.display = 'none';
     welcomeText.textContent = `Welcome, ${nickname}!`;
-
-    // Google Analytics tracking
-    gtag('event', 'set_nickname', {
-      nickname: nickname
-    });
-
-    // Amplitude tracking
-    amplitude.getInstance().logEvent('set_nickname', {
-      nickname: nickname
-    });
+    gtag('event', 'set_nickname', { nickname });
+    amplitude.track('Set Nickname', { nickname });
   }
 }
 
-// Show nickname if already saved
+// Nickname beim Laden anzeigen
 window.addEventListener('DOMContentLoaded', () => {
   const savedNickname = localStorage.getItem('nickname');
   if (savedNickname) {
     nicknameOverlay.style.display = 'none';
     welcomeText.textContent = `Welcome back, ${savedNickname}!`;
   }
-
-  // Start button event
-  const startButton = document.querySelector("#nicknameOverlay button");
-  startButton.addEventListener("click", saveNickname);
 });
 
-// Display image preview
+// Bildvorschau anzeigen
 function displayImagePreview(input, preview) {
   const file = input.files[0];
-  const reader = new FileReader();
+  if (!file) return;
 
-  reader.onloadend = function () {
+  const reader = new FileReader();
+  reader.onload = () => {
     preview.src = reader.result;
     preview.style.display = 'block';
     checkBattleReady();
   };
+  reader.readAsDataURL(file);
+}
 
-  if (file) {
-    reader.readAsDataURL(file);
+// Battle-Button aktivieren, wenn beide Bilder da sind
+function checkBattleReady() {
+  if (playerOneInput.files.length && playerTwoInput.files.length) {
+    battleBtn.disabled = false;
+  } else {
+    battleBtn.disabled = true;
   }
 }
 
-// Enable battle button only if both images are uploaded
-function checkBattleReady() {
-  battleBtn.disabled = !(playerOneInput.files.length > 0 && playerTwoInput.files.length > 0);
+// Bildvergleich (als Hash-Ersatz: Dateinamen vergleichen)
+function getFileHash(file1, file2) {
+  return `${file1.name}_${file2.name}_${file1.size}_${file2.size}`;
 }
 
-// Image upload event listeners
-playerOneInput.addEventListener('change', () => {
-  displayImagePreview(playerOneInput, playerOnePreview);
-  
-  // Amplitude tracking
-  amplitude.getInstance().logEvent('upload_image', {
-    'event_category': 'Image 1',
-    'event_label': 'Image Uploaded'
-  });
-});
-
-playerTwoInput.addEventListener('change', () => {
-  displayImagePreview(playerTwoInput, playerTwoPreview);
-  
-  // Amplitude tracking
-  amplitude.getInstance().logEvent('upload_image', {
-    'event_category': 'Image 2',
-    'event_label': 'Image Uploaded'
-  });
-});
-
-// Compare two images with FileReader
+// Bilder gleich?
 function areImagesEqual(file1, file2) {
   return new Promise((resolve, reject) => {
     const reader1 = new FileReader();
     const reader2 = new FileReader();
 
-    reader1.onload = function () {
-      reader2.onload = function () {
+    reader1.onload = () => {
+      reader2.onload = () => {
         resolve(reader1.result === reader2.result);
       };
-      reader2.onerror = () => reject('Error reading file 2');
+      reader2.onerror = reject;
       reader2.readAsDataURL(file2);
     };
 
-    reader1.onerror = () => reject('Error reading file 1');
+    reader1.onerror = reject;
     reader1.readAsDataURL(file1);
   });
 }
 
-// Simple hash using file names
-function getFileHash(file1, file2) {
-  return file1.name + '_' + file2.name;
-}
+// Upload-Events
+playerOneInput.addEventListener('change', () => {
+  displayImagePreview(playerOneInput, playerOnePreview);
+  amplitude.track('Upload Image', { slot: 'Image 1' });
+});
 
-// Battle logic
+playerTwoInput.addEventListener('change', () => {
+  displayImagePreview(playerTwoInput, playerTwoPreview);
+  amplitude.track('Upload Image', { slot: 'Image 2' });
+});
+
+// Battle starten
 battleBtn.addEventListener('click', () => {
   const file1 = playerOneInput.files[0];
   const file2 = playerTwoInput.files[0];
 
   if (!file1 || !file2) {
-    resultDiv.textContent = "Both players must upload images!";
+    resultDiv.textContent = "Please upload both images.";
     return;
   }
 
-  const currentHash = getFileHash(file1, file2);
+  const hash = getFileHash(file1, file2);
 
-  // Check if the current comparison is the same as the previous one
-  if (currentHash === previousHash) {
+  if (hash === previousHash) {
     resultDiv.textContent = previousResult;
     return;
   }
 
-  gtag('event', 'start', {
-    'event_category': 'Game',
-    'event_label': 'Generate Started'
-  });
-
-  // Amplitude tracking
-  amplitude.getInstance().logEvent('game_start', {
-    'event_category': 'Game',
-    'event_label': 'Generate Started'
-  });
+  amplitude.track('Battle Started');
 
   areImagesEqual(file1, file2).then(equal => {
-    let resultText;
-    if (equal) {
-      resultText = "It's a tie! Both images are the same.";
-    } else {
-      const winner = Math.random() < 0.5 ? "Image 1" : "Image 2";
-      resultText = `${winner} looks better! 🎉`;
-    }
+    let resultText = equal
+      ? "It's a tie! Both images are the same."
+      : `${Math.random() < 0.5 ? "Image 1" : "Image 2"} looks better! 🎉`;
 
     resultDiv.textContent = resultText;
-    previousHash = currentHash;
+    previousHash = hash;
     previousResult = resultText;
 
-    gtag('event', 'battle_result', {
-      'event_category': 'Game',
-      'event_label': resultText
-    });
-
-    // Amplitude tracking
-    amplitude.getInstance().logEvent('battle_result', {
-      'event_category': 'Game',
-      'event_label': resultText
-    });
-
+    amplitude.track('Battle Result', { result: resultText });
   }).catch(err => {
-    console.error("Image comparison error:", err);
-    resultDiv.textContent = `Error comparing images: ${err}`;
+    console.error("Comparison error:", err);
+    resultDiv.textContent = "Error comparing images.";
   });
 });
 
-// Privacy Policy overlay logic
-const openPrivacyBtn = document.getElementById("openPrivacyBtn");
-const privacyOverlay = document.getElementById("privacyOverlay");
-const closePrivacyBtn = document.getElementById("closePrivacyBtn");
-
-openPrivacyBtn.addEventListener("click", () => {
-  privacyOverlay.style.display = "flex";
+// Datenschutz anzeigen
+document.getElementById("openPrivacyBtn").addEventListener("click", () => {
+  document.getElementById("privacyOverlay").style.display = "flex";
 });
-
-closePrivacyBtn.addEventListener("click", () => {
-  privacyOverlay.style.display = "none";
+document.getElementById("closePrivacyBtn").addEventListener("click", () => {
+  document.getElementById("privacyOverlay").style.display = "none";
 });
