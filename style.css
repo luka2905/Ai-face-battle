@@ -327,4 +327,28 @@ input[type="file"] {
   max-width: 100%;
   border-radius: 8px;
 }
+.ad-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #a64ac9, #7b2cbf, #5a189a);
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.ad-banner p {
+  margin: 0;
+  animation: pulseText 2s infinite;
+}
+
+@keyframes pulseText {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
 
