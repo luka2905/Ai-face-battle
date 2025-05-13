@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AI Face Battle</title>
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -11,7 +13,43 @@
     gtag('js', new Date());
     gtag('config', 'G-DJ73ZJSSHG');
   </script>
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Amplitude Tracking -->
+  <script type="text/javascript">
+    (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
+    ;r.type="text/javascript"
+    ;r.async=true
+    ;r.src="https://cdn.amplitude.com/libs/amplitude-8.17.0-min.gz.js"
+    ;r.onload=function(){if(!e.amplitude.runQueuedFunctions){
+      console.log("[Amplitude] Error: Library did not load.")
+    }}
+    ;var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)
+    ;function s(e,t){e.prototype[t]=function(){
+      this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this
+    }}
+    var o=function(){this._q=[];return this}
+    ;var a=["add","append","clearAll","prepend","set","setOnce","unset"]
+    ;for(var c=0;c<a.length;c++){s(o,a[c])}n.Identify=o
+    ;var l=function(){this._q=[];return this}
+    ;var u=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"]
+    ;for(var p=0;p<u.length;p++){s(l,u[p])}n.Revenue=l
+    ;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut",
+    "setVersionName","setDomain","setDeviceId","enableTracking",
+    "setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2",
+    "regenerateDeviceId","groupIdentify","onInit","logEventWithTimestamp","logEventWithGroups",
+    "setSessionId","resetSessionId"]
+    ;function v(e){function t(t){e[t]=function(){
+      e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))
+    }}for(var n=0;n<d.length;n++){t(d[n])}}v(n)
+    ;n.getInstance=function(e){e=(!e||e.length===0?"default_instance":e).toLowerCase()
+    ;if(!n._iq.hasOwnProperty(e)){n._iq[e]={_q:[]};v(n._iq[e])}return n._iq[e]}
+    ;e.amplitude=n})(window,document);
+
+    amplitude.getInstance().init("112dc8b790c791b0abce53244ac11739");
+  </script>
+
+  <!-- Style und Script -->
+  <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -35,13 +73,8 @@
     <!-- Battle Button -->
     <button id="battleBtn" disabled>Battle starten</button>
 
-    <!-- Ergebnisanzeige -->
+    <!-- Ergebnis -->
     <div id="result"></div>
-
-    <!-- Instagram-Link mit LK -->
-    <a href="https://www.instagram.com/ai.face.battle/" target="_blank" id="company-logo">
-      LK
-    </a>
 
     <!-- Nickname Overlay -->
     <div id="nicknameOverlay" class="overlay">
@@ -52,30 +85,40 @@
       </div>
     </div>
 
-    <!-- Begrüßungstext nach Eingabe (Jetzt unten auf der Seite) -->
+    <!-- Begrüßung -->
     <div id="welcomeText" class="welcome-text">
       <h2>Welcome back</h2>
     </div>
 
-    <!-- Made in Georgia Box -->
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/ai.face.battle/" target="_blank" id="company-logo">
+      LK
+    </a>
+
+    <!-- Made in Georgia -->
     <div class="made-in-georgia">
       <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Georgia.svg" alt="Georgia Flag">
       <span>Made in Georgia</span>
     </div>
-        <!-- Werbebereich -->
-        <div class="ad-banner">
-        <p>Your ad could be here.</p>
-         </div> 
-    <div class="ad-banner">
-  <p><a href="mailto:llaaccessorieess@gmail.com
-" style="color: white; text-decoration: underline;">Your ad could be here.</a></p>
-</div>
 
+    <!-- Werbung -->
+    <div class="ad-banner">
+      <p><a href="mailto:llaaccessorieess@gmail.com" style="color: white; text-decoration: underline;">
+        Your ad could be here.
+      </a></p>
+    </div>
 
     <!-- Privacy Policy Button -->
     <button id="openPrivacyBtn" class="privacy-btn">Privacy Policy</button>
-   <!-- Privacy Policy Overlay -->
+
+    <!-- Privacy Overlay -->
     <div id="privacyOverlay" class="privacy-overlay">
       <div class="privacy-content">
         <button id="closePrivacyBtn" class="close-btn">&times;</button>
         <h2>Privacy Policy of AI Face Battle</h2>
+        <p>Your data is only used locally in the browser. We do not store any personal data on servers.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
