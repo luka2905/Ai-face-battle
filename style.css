@@ -351,4 +351,13 @@ input[type="file"] {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.6; }
 }
+.ad-banner {
+  background: linear-gradient(90deg, #a64ac9, #7b2cbf);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 30px;
+  border-radius: 10px;
+  font-weight: bold;
+}
 
