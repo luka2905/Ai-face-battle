@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Face Battle</title>
+
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TXZ4KQ5W8P"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -11,6 +13,7 @@
     gtag('js', new Date());
     gtag('config', 'G-DJ73ZJSSHG');
   </script>
+
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -52,7 +55,7 @@
       </div>
     </div>
 
-    <!-- Begrüßungstext nach Eingabe (Jetzt unten auf der Seite) -->
+    <!-- Begrüßungstext nach Eingabe -->
     <div id="welcomeText" class="welcome-text">
       <h2>Welcome back</h2>
     </div>
@@ -82,9 +85,6 @@
     </div>
   </div>
 
- 
-
-
   <!-- ✅ Amplitude v2 + Session Replay -->
   <script src="https://cdn.amplitude.com/script/8c8d9e3d7080e5bfd91a608b6f703256.js"></script>
   <script>
@@ -98,21 +98,6 @@
     window.amplitude.track('page_loaded');
   </script>
 
-  <!-- Amplitude Integration -->
-  <script type="text/javascript">
-    (function(e,t){
-      var n=e.amplitude||{_q:[],_iq:{}};
-      var r=t.createElement("script");r.type="text/javascript";r.async=true;
-      r.src="https://cdn.amplitude.com/libs/amplitude-2.16.1-min.js";
-      r.onload=function(){e.amplitude.runQueuedFunctions()};
-      var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i);
-      var s=function(t,n){e.amplitude[t]=function(){e.amplitude._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}};
-      var o=["add","append","clearAll","setUserId","setUserProperties","logEvent"];
-      for(var a=0;a<o.length;a++){s(o[a])} 
-    })(window,document);
-    
-    amplitude.getInstance().init("8c8d9e3d7080e5bfd91a608b6f703256");
-  </script>
-</head>
-<body>
- 
+</body>
+</html>
+
