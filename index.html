@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Face Battle</title>
-
-  <!-- Google Analytics Integration -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,6 +11,79 @@
     gtag('js', new Date());
     gtag('config', 'G-DJ73ZJSSHG');
   </script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 AI Face Battle</h1>
+
+    <!-- Spieler Uploads -->
+    <div class="upload-section">
+      <div class="upload-box">
+        <h3>Picture 1</h3>
+        <input type="file" accept="image/*" id="playerOneInput" />
+        <img id="playerOnePreview" class="preview" />
+      </div>
+      <div class="upload-box">
+        <h3>Picture 2</h3>
+        <input type="file" accept="image/*" id="playerTwoInput" />
+        <img id="playerTwoPreview" class="preview" />
+      </div>
+    </div>
+
+    <!-- Battle Button -->
+    <button id="battleBtn" disabled>Battle starten</button>
+
+    <!-- Ergebnisanzeige -->
+    <div id="result"></div>
+
+    <!-- Instagram-Link mit LK -->
+    <a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
+      LK
+    </a>
+
+    <!-- Nickname Overlay -->
+    <div id="nicknameOverlay" class="overlay">
+      <div class="nickname-box">
+        <h2>Choose your nickname</h2>
+        <input type="text" id="nicknameInput" placeholder="Enter nickname..." />
+        <button onclick="saveNickname()">Start</button>
+      </div>
+    </div>
+
+    <!-- Begrüßungstext nach Eingabe (Jetzt unten auf der Seite) -->
+    <div id="welcomeText" class="welcome-text">
+      <h2>Welcome back</h2>
+    </div>
+
+    <!-- Made in Georgia Box -->
+    <div class="made-in-georgia">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Georgia.svg" alt="Georgia Flag">
+      <span>Made in Georgia</span>
+    </div>
+
+    <!-- Privacy Policy Button -->
+    <button id="openPrivacyBtn" class="privacy-btn">Privacy Policy</button>
+
+    <!-- Privacy Policy Overlay -->
+    <div id="privacyOverlay" class="privacy-overlay">
+      <div class="privacy-content">
+        <button id="closePrivacyBtn" class="close-btn">&times;</button>
+        <h2>Privacy Policy of AI Face Battle</h2>
+        <p>We take the protection of your data very seriously...</p>
+      </div>
+    </div>
+
+    <div class="ad-banner">
+      <p>Your ad could be here – reach thousands of users every day! 
+        <a href="mailto:llaaccessorieess@gmail.com">Contact us</a>
+      </p>
+    </div>
+  </div>
+
+ 
+
 
   <!-- ✅ Amplitude v2 + Session Replay -->
   <script src="https://cdn.amplitude.com/script/8c8d9e3d7080e5bfd91a608b6f703256.js"></script>
@@ -44,29 +115,4 @@
   </script>
 </head>
 <body>
-  <!-- Your HTML content goes here -->
-  <div id="nicknameOverlay">
-    <input type="text" id="nicknameInput" placeholder="Enter your nickname">
-    <button>Start</button>
-  </div>
-
-  <div id="welcomeText"></div>
-
-  <input type="file" id="playerOneInput">
-  <img id="playerOnePreview" style="display:none">
-  
-  <input type="file" id="playerTwoInput">
-  <img id="playerTwoPreview" style="display:none">
-  
-  <button id="battleBtn" disabled>Battle!</button>
-
-  <div id="result"></div>
-
-  <!-- Privacy Policy Overlay -->
-  <div id="privacyOverlay" style="display:none">
-    <button id="closePrivacyBtn">Close</button>
-    <p>Privacy Policy content here...</p>
-  </div>
-  <button id="openPrivacyBtn">Privacy Policy</button>
-</body>
-</html>
+ 
