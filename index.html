@@ -11,7 +11,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-DJ73ZJSSHG');
+    gtag('config', 'G-TXZ4KQ5W8P');
   </script>
 
   <link rel="stylesheet" href="style.css">
@@ -42,7 +42,7 @@
     <div id="result"></div>
 
     <!-- Instagram-Link mit LK -->
-    <a href="https://www.instagram.com/luka.2905/" target="_blank" id="company-logo">
+    <a href="https://www.instagram.com/ai.face.battle/" target="_blank" id="company-logo">
       LK
     </a>
 
@@ -98,6 +98,18 @@
     window.amplitude.track('page_loaded');
   </script>
 
+  <!-- Optional: If you want to log a stream name or ID in Amplitude -->
+  <script>
+    // Stream ID and Stream Name for custom tracking
+    var streamName = 'Ai-face-battlee';
+    var streamID = '10599109931';
+
+    // Example of logging a custom event with stream details in Amplitude
+    window.amplitude.logEvent('Stream_Started', {
+      'stream_name': streamName,
+      'stream_id': streamID
+    });
+  </script>
+
 </body>
 </html>
-
