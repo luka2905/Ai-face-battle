@@ -20,13 +20,8 @@ function saveNickname() {
     nicknameOverlay.style.display = 'none';
     welcomeText.textContent = `Welcome, ${nickname}!`;
 
-    // Amplitude tracking (set user ID for the session)
-    amplitude.getInstance().setUserId(nickname);
-
-    // Google Analytics tracking
-    gtag('event', 'set_nickname', {
-      nickname: nickname
-    });
+    amplitude.getInstance().setUserId(nickname); // Amplitude
+    gtag('event', 'set_nickname', { nickname }); // GA
   }
 }
 
@@ -36,28 +31,24 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedNickname) {
     nicknameOverlay.style.display = 'none';
     welcomeText.textContent = `Welcome back, ${savedNickname}!`;
-    amplitude.getInstance().setUserId(savedNickname);  // Set user ID on Amplitude
+    amplitude.getInstance().setUserId(savedNickname);
   }
 
-  // Start button event
-  const startButton = document.querySelector("#nicknameOverlay button");
-  startButton.addEventListener("click", saveNickname);
+  document.querySelector("#nicknameOverlay button")?.addEventListener("click", saveNickname);
 });
 
-// Display image preview
+// Show image preview
 function displayImagePreview(input, preview) {
   const file = input.files[0];
-  const reader = new FileReader();
+  if (!file) return;
 
-  reader.onloadend = function () {
+  const reader = new FileReader();
+  reader.onloadend = () => {
     preview.src = reader.result;
     preview.style.display = 'block';
     checkBattleReady();
   };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
+  reader.readAsDataURL(file);
 }
 
 // Enable battle button only if both images are uploaded
@@ -69,37 +60,18 @@ function checkBattleReady() {
 playerOneInput.addEventListener('change', () => {
   displayImagePreview(playerOneInput, playerOnePreview);
   gtag('event', 'upload_image', {
-    'event_category': 'Image 1',
-    'event_label': 'Image Uploaded'
+    event_category: 'Image 1',
+    event_label: 'Image Uploaded'
   });
 });
 
 playerTwoInput.addEventListener('change', () => {
   displayImagePreview(playerTwoInput, playerTwoPreview);
   gtag('event', 'upload_image', {
-    'event_category': 'Image 2',
-    'event_label': 'Image Uploaded'
+    event_category: 'Image 2',
+    event_label: 'Image Uploaded'
   });
 });
-
-// Compare two images with FileReader
-function areImagesEqual(file1, file2) {
-  return new Promise((resolve, reject) => {
-    const reader1 = new FileReader();
-    const reader2 = new FileReader();
-
-    reader1.onload = function () {
-      reader2.onload = function () {
-        resolve(reader1.result === reader2.result);
-      };
-      reader2.onerror = () => reject('Error reading file 2');
-      reader2.readAsDataURL(file2);
-    };
-
-    reader1.onerror = () => reject('Error reading file 1');
-    reader1.readAsDataURL(file1);
-  });
-}
 
 // Simple hash using file names
 function getFileHash(file1, file2) {
@@ -117,52 +89,57 @@ battleBtn.addEventListener('click', () => {
   }
 
   const currentHash = getFileHash(file1, file2);
-
   if (currentHash === previousHash) {
     resultDiv.textContent = previousResult;
     return;
   }
 
   gtag('event', 'start', {
-    'event_category': 'Game',
-    'event_label': 'Generate Started'
+    event_category: 'Game',
+    event_label: 'Generate Started'
   });
 
-  areImagesEqual(file1, file2).then(equal => {
-    let resultText;
-    if (equal) {
-      resultText = "It's a tie! Both images are the same.";
-    } else {
-      const winner = Math.random() < 0.5 ? "Image 1" : "Image 2";
-      resultText = `${winner} looks better! 🎉`;
-    }
+  const reader1 = new FileReader();
+  const reader2 = new FileReader();
 
-    resultDiv.textContent = resultText;
-    previousHash = currentHash;
-    previousResult = resultText;
+  reader1.onload = () => {
+    const imgData1 = reader1.result;
 
-    gtag('event', 'battle_result', {
-      'event_category': 'Game',
-      'event_label': resultText
-    });
+    reader2.onload = () => {
+      const imgData2 = reader2.result;
 
-    amplitude.getInstance().logEvent('battle_result', { result: resultText });  // Log event in Amplitude
+      let resultText;
+      if (imgData1 === imgData2) {
+        resultText = "It's a tie! Both images are the same.";
+      } else {
+        const winner = Math.random() < 0.5 ? "Image 1" : "Image 2";
+        resultText = `${winner} looks better! 🎉`;
+      }
 
-  }).catch(err => {
-    console.error("Image comparison error:", err);
-    resultDiv.textContent = `Error comparing images: ${err}`;
-  });
+      resultDiv.textContent = resultText;
+      previousHash = currentHash;
+      previousResult = resultText;
+
+      gtag('event', 'battle_result', {
+        event_category: 'Game',
+        event_label: resultText
+      });
+
+      amplitude.getInstance().logEvent('battle_result', { result: resultText });
+    };
+
+    reader2.onerror = () => {
+      resultDiv.textContent = "Error reading second image.";
+    };
+
+    reader2.readAsDataURL(file2);
+  };
+
+  reader1.onerror = () => {
+    resultDiv.textContent = "Error reading first image.";
+  };
+
+  reader1.readAsDataURL(file1);
 });
+document.querySelector("#nicknameOverlay button")?.addEventListener("click", saveNickname);
 
-// Privacy Policy overlay logic
-const openPrivacyBtn = document.getElementById("openPrivacyBtn");
-const privacyOverlay = document.getElementById("privacyOverlay");
-const closePrivacyBtn = document.getElementById("closePrivacyBtn");
-
-openPrivacyBtn.addEventListener("click", () => {
-  privacyOverlay.style.display = "flex";
-});
-
-closePrivacyBtn.addEventListener("click", () => {
-  privacyOverlay.style.display = "none";
-});
