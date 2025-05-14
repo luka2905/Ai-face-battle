@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Face Battle</title>
 
-  <!-- Google Analytics -->
+  <!-- Google Analytics Integration -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJ73ZJSSHG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-DJ73ZJSSHG');
   </script>
 
   <!-- ✅ Amplitude v2 + Session Replay -->
- <script src="https://cdn.amplitude.com/script/8c8d9e3d7080e5bfd91a608b6f703256.js"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));window.amplitude.init('8c8d9e3d7080e5bfd91a608b6f703256', {"fetchRemoteConfig":true,"autocapture":true});</script>
+  <script src="https://cdn.amplitude.com/script/8c8d9e3d7080e5bfd91a608b6f703256.js"></script>
   <script>
-    window.amplitude.add(window.sessionReplay.plugin({
-      sampleRate: 1
-    }));
-
+    window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
     window.amplitude.init('8c8d9e3d7080e5bfd91a608b6f703256', {
       fetchRemoteConfig: true,
       autocapture: true
@@ -30,126 +27,46 @@
     window.amplitude.track('page_loaded');
   </script>
 
-  <link rel="stylesheet" href="style.css" />
-  <script defer>
-    // === JS CODE ===
-    let nickname = '';
-
-    // Event Listener für Nickname speichern
-    function saveNickname() {
-      const input = document.getElementById("nicknameInput");
-      nickname = input.value.trim();
-      if (nickname !== "") {
-        document.getElementById("nicknameOverlay").style.display = "none";
-        document.getElementById("welcomeText").textContent = `Welcome, ${nickname}!`;
-        window.amplitude.setUserId(nickname);
-        window.amplitude.track("nickname_entered", { nickname });
-      }
-    }
-
-    // Vorschau-Funktion für Bild
-    function previewImage(inputId, previewId, playerLabel) {
-      const input = document.getElementById(inputId);
-      const preview = document.getElementById(previewId);
-      input.addEventListener("change", () => {
-        const file = input.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = () => {
-            preview.src = reader.result;
-            preview.style.display = "block";
-            checkFiles();
-            window.amplitude.track("image_uploaded", { player: playerLabel });
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-    }
-
-    // Beide Bilder vorhanden?
-    function checkFiles() {
-      const file1 = document.getElementById("playerOneInput").files.length > 0;
-      const file2 = document.getElementById("playerTwoInput").files.length > 0;
-      document.getElementById("battleBtn").disabled = !(file1 && file2);
-    }
-
-    // Battle starten
-    window.addEventListener("DOMContentLoaded", () => {
-      previewImage("playerOneInput", "playerOnePreview", "Player 1");
-      previewImage("playerTwoInput", "playerTwoPreview", "Player 2");
-
-      document.getElementById("battleBtn").addEventListener("click", () => {
-        const result = Math.random() < 0.5 ? "Player 1 wins!" : "Player 2 wins!";
-        document.getElementById("result").textContent = result;
-        window.amplitude.track("battle_started", { winner: result });
-      });
-
-      // Datenschutz Overlay
-      document.getElementById("openPrivacyBtn").onclick = () => {
-        document.getElementById("privacyOverlay").style.display = "block";
-      };
-      document.getElementById("closePrivacyBtn").onclick = () => {
-        document.getElementById("privacyOverlay").style.display = "none";
-      };
-    });
+  <!-- Amplitude Integration -->
+  <script type="text/javascript">
+    (function(e,t){
+      var n=e.amplitude||{_q:[],_iq:{}};
+      var r=t.createElement("script");r.type="text/javascript";r.async=true;
+      r.src="https://cdn.amplitude.com/libs/amplitude-2.16.1-min.js";
+      r.onload=function(){e.amplitude.runQueuedFunctions()};
+      var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i);
+      var s=function(t,n){e.amplitude[t]=function(){e.amplitude._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}};
+      var o=["add","append","clearAll","setUserId","setUserProperties","logEvent"];
+      for(var a=0;a<o.length;a++){s(o[a])} 
+    })(window,document);
+    
+    amplitude.getInstance().init("8c8d9e3d7080e5bfd91a608b6f703256");
   </script>
 </head>
 <body>
-  <div class="container">
-    <h1>🧠 AI Face Battle</h1>
-
-    <!-- Upload section -->
-    <div class="upload-section">
-      <div class="upload-box">
-        <h3>Picture 1</h3>
-        <input type="file" accept="image/*" id="playerOneInput" />
-        <img id="playerOnePreview" class="preview" style="display:none;" />
-      </div>
-      <div class="upload-box">
-        <h3>Picture 2</h3>
-        <input type="file" accept="image/*" id="playerTwoInput" />
-        <img id="playerTwoPreview" class="preview" style="display:none;" />
-      </div>
-    </div>
-
-    <!-- Battle button -->
-    <button id="battleBtn" disabled>Battle starten</button>
-
-    <!-- Ergebnis -->
-    <div id="result"></div>
-
-    <!-- Nickname Overlay -->
-    <div id="nicknameOverlay" class="overlay">
-      <div class="nickname-box">
-        <h2>Choose your nickname</h2>
-        <input type="text" id="nicknameInput" placeholder="Enter nickname..." />
-        <button onclick="saveNickname()">Start</button>
-      </div>
-    </div>
-
-    <!-- Willkommen -->
-    <div id="welcomeText" class="welcome-text"></div>
-
-    <!-- Werbung -->
-    <div class="ad-banner">
-      <p><a href="mailto:llaaccessorieess@gmail.com" style="color: white;">Your ad could be here.</a></p>
-    </div>
-<!-- Made in Georgia Box -->
-<div class="made-in-georgia">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_Georgia.svg" alt="Georgia Flag">
-  <span>Made in Georgia</span>
-</div>
-
-
-    <!-- Datenschutz -->
-    <button id="openPrivacyBtn" class="privacy-btn">Privacy Policy</button>
-    <div id="privacyOverlay" class="privacy-overlay" style="display:none;">
-      <div class="privacy-content">
-        <button id="closePrivacyBtn" class="close-btn">&times;</button>
-        <h2>Privacy Policy of AI Face Battle</h2>
-        <p>This app uses Amplitude and Google Analytics to understand usage.</p>
-      </div>
-    </div>
+  <!-- Your HTML content goes here -->
+  <div id="nicknameOverlay">
+    <input type="text" id="nicknameInput" placeholder="Enter your nickname">
+    <button>Start</button>
   </div>
+
+  <div id="welcomeText"></div>
+
+  <input type="file" id="playerOneInput">
+  <img id="playerOnePreview" style="display:none">
+  
+  <input type="file" id="playerTwoInput">
+  <img id="playerTwoPreview" style="display:none">
+  
+  <button id="battleBtn" disabled>Battle!</button>
+
+  <div id="result"></div>
+
+  <!-- Privacy Policy Overlay -->
+  <div id="privacyOverlay" style="display:none">
+    <button id="closePrivacyBtn">Close</button>
+    <p>Privacy Policy content here...</p>
+  </div>
+  <button id="openPrivacyBtn">Privacy Policy</button>
 </body>
 </html>
