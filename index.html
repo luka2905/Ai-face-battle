@@ -14,23 +14,85 @@
     gtag('config', 'G-DJ73ZJSSHG');
   </script>
 
-  <!-- Amplitude SDK -->
-  <script src="https://cdn.amplitude.com/libs/amplitude-8.17.0-min.gz.js"></script>
+  <!-- ✅ Amplitude v2 + Session Replay -->
+  <script src="https://cdn.amplitude.com/script/3d6990ee04cb15210273ee7dd02b52ac.js"></script>
   <script>
-    // Initialize Amplitude with your Project API Key
-    amplitude.getInstance().init("3d6990ee04cb15210273ee7dd02b52ac", null, {
-      defaultTracking: true // Automatic session and device tracking
+    window.amplitude.add(window.sessionReplay.plugin({
+      sampleRate: 1
+    }));
+
+    window.amplitude.init('3d6990ee04cb15210273ee7dd02b52ac', {
+      fetchRemoteConfig: true,
+      autocapture: true
     });
 
-    // Optionally, set a custom user ID for tracking
-    // amplitude.getInstance().setUserId("nickname123");  // Uncomment if using nickname
-
-    // Log a test event to confirm setup
-    amplitude.getInstance().logEvent("page_loaded");
+    // Track page load
+    window.amplitude.track('page_loaded');
   </script>
 
   <link rel="stylesheet" href="style.css" />
-  <script src="script.js" defer></script>
+  <script defer>
+    // === JS CODE ===
+    let nickname = '';
+
+    // Event Listener für Nickname speichern
+    function saveNickname() {
+      const input = document.getElementById("nicknameInput");
+      nickname = input.value.trim();
+      if (nickname !== "") {
+        document.getElementById("nicknameOverlay").style.display = "none";
+        document.getElementById("welcomeText").textContent = `Welcome, ${nickname}!`;
+        window.amplitude.setUserId(nickname);
+        window.amplitude.track("nickname_entered", { nickname });
+      }
+    }
+
+    // Vorschau-Funktion für Bild
+    function previewImage(inputId, previewId, playerLabel) {
+      const input = document.getElementById(inputId);
+      const preview = document.getElementById(previewId);
+      input.addEventListener("change", () => {
+        const file = input.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = () => {
+            preview.src = reader.result;
+            preview.style.display = "block";
+            checkFiles();
+            window.amplitude.track("image_uploaded", { player: playerLabel });
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Beide Bilder vorhanden?
+    function checkFiles() {
+      const file1 = document.getElementById("playerOneInput").files.length > 0;
+      const file2 = document.getElementById("playerTwoInput").files.length > 0;
+      document.getElementById("battleBtn").disabled = !(file1 && file2);
+    }
+
+    // Battle starten
+    window.addEventListener("DOMContentLoaded", () => {
+      previewImage("playerOneInput", "playerOnePreview", "Player 1");
+      previewImage("playerTwoInput", "playerTwoPreview", "Player 2");
+
+      document.getElementById("battleBtn").addEventListener("click", () => {
+        const result = Math.random() < 0.5 ? "Player 1 wins!" : "Player 2 wins!";
+        document.getElementById("result").textContent = result;
+        window.amplitude.track("battle_started", { winner: result });
+      });
+
+      // Datenschutz Overlay
+      document.getElementById("openPrivacyBtn").onclick = () => {
+        document.getElementById("privacyOverlay").style.display = "block";
+      };
+      document.getElementById("closePrivacyBtn").onclick = () => {
+        document.getElementById("privacyOverlay").style.display = "none";
+      };
+    });
+  </script>
 </head>
 <body>
   <div class="container">
@@ -41,19 +103,19 @@
       <div class="upload-box">
         <h3>Picture 1</h3>
         <input type="file" accept="image/*" id="playerOneInput" />
-        <img id="playerOnePreview" class="preview" />
+        <img id="playerOnePreview" class="preview" style="display:none;" />
       </div>
       <div class="upload-box">
         <h3>Picture 2</h3>
         <input type="file" accept="image/*" id="playerTwoInput" />
-        <img id="playerTwoPreview" class="preview" />
+        <img id="playerTwoPreview" class="preview" style="display:none;" />
       </div>
     </div>
 
     <!-- Battle button -->
     <button id="battleBtn" disabled>Battle starten</button>
 
-    <!-- Result -->
+    <!-- Ergebnis -->
     <div id="result"></div>
 
     <!-- Nickname Overlay -->
@@ -65,17 +127,17 @@
       </div>
     </div>
 
-    <!-- Welcome message -->
+    <!-- Willkommen -->
     <div id="welcomeText" class="welcome-text"></div>
 
-    <!-- Ad banner -->
+    <!-- Werbung -->
     <div class="ad-banner">
       <p><a href="mailto:llaaccessorieess@gmail.com" style="color: white;">Your ad could be here.</a></p>
     </div>
 
-    <!-- Privacy policy -->
+    <!-- Datenschutz -->
     <button id="openPrivacyBtn" class="privacy-btn">Privacy Policy</button>
-    <div id="privacyOverlay" class="privacy-overlay">
+    <div id="privacyOverlay" class="privacy-overlay" style="display:none;">
       <div class="privacy-content">
         <button id="closePrivacyBtn" class="close-btn">&times;</button>
         <h2>Privacy Policy of AI Face Battle</h2>
